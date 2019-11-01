@@ -1,8 +1,10 @@
 package ui;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
-public class SummaryPane extends Pane {
+public class SummaryPane extends VBox {
     private static SummaryPane instance;
 
     public static SummaryPane getInstance() {
@@ -12,6 +14,7 @@ public class SummaryPane extends Pane {
     }
 
     private SummaryPane() {
-
+        this.setStyle("-fx-background-color: bisque");
+        this.getChildren().add(new Text("Summary"));
     }
 }

@@ -12,6 +12,8 @@ public class MainPane extends BorderPane {
     }
 
     private MainPane() {
-        
+        this.setLeft(FilterPane.getInstance());
+        this.setCenter(SummaryPane.getInstance());
+        this.setRight(DescriptionPane.getInstance());
     }
 }
