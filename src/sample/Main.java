@@ -11,8 +11,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(MainPane.getInstance(), 300, 275));
+        primaryStage.setTitle("Taskmaster");
+        primaryStage.setScene(new Scene(MainPane.getInstance(), 800, 600));
         primaryStage.show();
     }
 
