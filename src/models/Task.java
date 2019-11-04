@@ -8,7 +8,13 @@ public class Task {
     private String tag;
     private boolean completed;
 
-
+    public Task(int id, String title, String date, String tag, boolean completed) {
+        this.id = id;
+        this.title = title;
+        this.date = date;
+        this.tag = tag;
+        this.completed = completed;
+    }
 
     public int getId() {
         return id;
