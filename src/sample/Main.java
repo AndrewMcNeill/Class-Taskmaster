@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
-    private ArrayList<Task> taskCollection = new ArrayList<Task>();
+    public static ArrayList<Task> taskCollection = new ArrayList<Task>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
