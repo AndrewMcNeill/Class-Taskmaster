@@ -20,8 +20,10 @@ public class SummaryList extends ScrollPane {
         this.setStyle("-fx-background: transparent");
 
         VBox vb = new VBox();
+        vb.setSpacing(10);
+        vb.setStyle("-fx-padding: 10px");
         for (int i = 0; i < 100; i++) {
-            vb.getChildren().add(new Text("Test"));
+            vb.getChildren().add(new TaskSummary());
         }
 
         this.setContent(vb);
