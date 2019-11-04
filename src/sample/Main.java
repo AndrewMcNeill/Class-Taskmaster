@@ -5,9 +5,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import models.Task;
 import ui.MainPane;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Main extends Application {
+
+    public static ArrayList<Task> taskCollection = new ArrayList<Task>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
