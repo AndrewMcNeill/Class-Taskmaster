@@ -3,6 +3,8 @@ package ui;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import models.Task;
+import sample.Main;
 
 public class SummaryList extends ScrollPane {
     private static SummaryList instance;
@@ -19,11 +21,18 @@ public class SummaryList extends ScrollPane {
         this.getStyleClass().add("edge-to-edge");
         this.setStyle("-fx-background: transparent");
 
+        refresh();
+    }
+
+    /**
+     * Clear the task summaries from the screen and replace with what's in Main.taskCollection
+     */
+    public void refresh() {
         VBox vb = new VBox();
         vb.setSpacing(10);
         vb.setStyle("-fx-padding: 10px");
-        for (int i = 0; i < 100; i++) {
-            vb.getChildren().add(new TaskSummary());
+        for (int i = 0; i < Main.taskCollection.size(); i++) {
+            vb.getChildren().add(new TaskSummary(Main.taskCollection.get(i)));
         }
 
         this.setContent(vb);
