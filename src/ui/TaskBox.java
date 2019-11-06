@@ -53,11 +53,14 @@ public class TaskBox extends HBox {
         });
 
         addTask.setOnMouseClicked(e->{
-            String tag = tagsButton.getText().equals("Tags") ? "" : tagsButton.getText();               //          default to no tag if isnt chosen
-            date = date == null ? LocalDate.now().format(DateTimeFormatter.ofPattern(FORMAT)) : date;   //default to todays date if no date entered
-            Task task = new Task(0, taskTitle.getText(), date, tag, false);
-            Main.addTask(task);
-            clearUI();
+            if(!(taskTitle.getText().equals(""))) {
+                String tag = tagsButton.getText().equals("Tags") ? "" : tagsButton.getText();               //          default to no tag if isnt chosen
+                date = date == null ? LocalDate.now().format(DateTimeFormatter.ofPattern(FORMAT)) : date;   //default to todays date if no date entered
+                Task task = new Task(0, taskTitle.getText(), date, tag, false);
+                Main.addTask(task);
+                clearUI();
+            }
+
         });
 
         CustomMenuItem addTag = new CustomMenuItem(newTag, false);
