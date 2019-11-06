@@ -7,6 +7,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import models.Task;
 import ui.MainPane;
+import ui.SummaryList;
+import ui.SummaryPane;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -22,6 +24,10 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    public static void addTask(Task task) {
+        Main.taskCollection.add(task);
+        SummaryList.getInstance().refresh();
+    }
 
     public static void main(String[] args) {
         launch(args);
