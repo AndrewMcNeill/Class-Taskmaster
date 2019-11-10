@@ -60,7 +60,6 @@ public class DescriptionPane extends VBox {
                 this.task.setDate(taskDate.getValue());
                 this.task.setStringDate(taskDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
                 SummaryList.getInstance().refresh();
-                System.out.println("Date updated on: " + this.task );
             }
         });
 
@@ -69,7 +68,6 @@ public class DescriptionPane extends VBox {
             if(!(this.task.getTag().equals(newVal))) {
                 this.task.setTag(tagsButton.tagsButton.getText());
                 SummaryList.getInstance().refresh();
-                System.out.println("updated tag!");
             }
         });
 

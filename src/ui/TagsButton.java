@@ -53,10 +53,8 @@ public class TagsButton {
         tagsButton.getItems().clear();
         tagsButton.getItems().add(new CustomMenuItem(newTag, false));
         for (MenuItem item : Main.tagList.values()){
-            if (!(this.tagsButton.getItems().contains(item))){
-                System.out.println("tagsButton " + tagsButton + " doesnt have item: " + item);
-                tagsButton.getItems().add(item);
-            }
+            item.setOnAction(f->{tagsButton.setText(item.getText());});
+            tagsButton.getItems().add(item);
         }
     }
 }
