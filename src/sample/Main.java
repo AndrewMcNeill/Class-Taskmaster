@@ -1,23 +1,31 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
+import models.Task;
+import ui.MainPane;
+import ui.SummaryList;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main extends Application {
 
+    public static ArrayList<Task> taskCollection = new ArrayList<Task>();
+    public static HashMap<String, MenuItem> tagList = new HashMap<>();
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setTitle("Taskmaster");
+        primaryStage.setScene(new Scene(MainPane.getInstance(), 960, 540 ));
         primaryStage.show();
     }
 
-
-    public static void main(String[] args) {
-        launch(args);
+    public static void addTask(Task task) {
+        Main.taskCollection.add(task);
+        SummaryList.getInstance().refresh();
     }
+
+    public static void main(String[] args) { launch(args); }
 }
