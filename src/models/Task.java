@@ -1,17 +1,22 @@
 package models;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
 
     private int id;
     private String title;
-    private String date;
+    private LocalDate date;
+    private String stringDate;
     private String tag;
     private boolean completed;
 
-    public Task(int id, String title, String date, String tag, boolean completed) {
+    public Task(int id, String title, LocalDate date, String tag, boolean completed) {
         this.id = id;
         this.title = title;
         this.date = date;
+        this.stringDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.tag = tag;
         this.completed = completed;
     }
@@ -32,11 +37,11 @@ public class Task {
         this.title = title;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -54,6 +59,14 @@ public class Task {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public String getStringDate() {
+        return stringDate;
+    }
+
+    public void setStringDate(String stringDate) {
+        this.stringDate = stringDate;
     }
 }
 
