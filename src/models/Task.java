@@ -9,14 +9,16 @@ public class Task {
     private String title;
     private LocalDate date;
     private String stringDate;
+    private String description;
     private String tag;
     private boolean completed;
 
-    public Task(int id, String title, LocalDate date, String tag, boolean completed) {
+    public Task(int id, String title, LocalDate date, String description, String tag, boolean completed) {
         this.id = id;
         this.title = title;
         this.date = date;
         this.stringDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.description = description;
         this.tag = tag;
         this.completed = completed;
     }
@@ -67,6 +69,14 @@ public class Task {
 
     public void setStringDate(String stringDate) {
         this.stringDate = stringDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 

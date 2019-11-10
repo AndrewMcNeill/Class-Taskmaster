@@ -30,9 +30,9 @@ public class TaskBox extends HBox {
         Button addTask = new Button("Add Task");
         addTask.setOnMouseClicked(e->{
             if(!(taskTitle.getText().equals(""))) {
-                String tag = tagsButton.tagsButton.getText().equals("Tags") ? "" : tagsButton.tagsButton.getText();     //default to no tag if isnt chosen
+                String tag = tagsButton.tagsButton.getText().equals("Tags") ? "No Tag!" : tagsButton.tagsButton.getText();     //default to no tag if isnt chosen
                 date = date == null ? LocalDate.now() : date;                                               //default to todays date if no date entered
-                Task task = new Task(0, taskTitle.getText(), date, tag, false);
+                Task task = new Task(0, taskTitle.getText(), date, "", tag, false);
                 Main.addTask(task);
                 clearUI();
             }

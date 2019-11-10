@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
@@ -19,6 +20,7 @@ public class DescriptionPane extends VBox {
     private TextField taskTitle      = new TextField();
     private DatePicker taskDate      = new DatePicker();
     private TagsButton tagsButton    = new TagsButton();
+    private TextArea taskDescription = new TextArea();
     private final Label noneSelected = new Label("Click on a Task to see its details");
 
 
@@ -33,7 +35,7 @@ public class DescriptionPane extends VBox {
 
         this.setStyle("-fx-background-color: aqua");
         hbox.getChildren().addAll(taskTitle, taskDate);
-        vbox.getChildren().addAll(hbox, tagsButton.tagsButton);
+        vbox.getChildren().addAll(hbox, taskDescription, tagsButton.tagsButton);
         vbox.setVisible(false);
 
         this.getChildren().addAll(noneSelected, vbox);
@@ -71,6 +73,14 @@ public class DescriptionPane extends VBox {
             }
         });
 
+        taskDescription.textProperty().addListener((observableValue, oldVal, newVal) -> {
+            if(!(this.task.getDescription().equals(newVal))) {
+                this.task.setDescription(taskDescription.getText());
+                SummaryList.getInstance().refresh();
+            }
+        });
+        taskDescription.setMaxWidth(300);
+
     }
 
     void updateDesc(Task task) {
@@ -81,6 +91,7 @@ public class DescriptionPane extends VBox {
         taskDate.setValue(task.getDate());
         String tag = task.getTag().equals("") ? "No Tag!" : task.getTag();
         tagsButton.tagsButton.setText(tag);
+        taskDescription.setText(task.getDescription());
     }
 
 
