@@ -12,6 +12,11 @@ public class MainPane extends BorderPane {
     }
 
     private MainPane() {
+
+        this.setCenter(DBLoginPane.getInstance());
+    }
+
+    public void switchPane() {
         this.setLeft(FilterPane.getInstance());
         this.setCenter(SummaryPane.getInstance());
         this.setRight(DescriptionPane.getInstance());
