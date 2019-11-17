@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import sample.Main;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 public class DBLoginPane extends VBox {
@@ -43,7 +44,11 @@ public class DBLoginPane extends VBox {
                 Const.dbLoginData.put("password", dbPass.getText());
                 Const.dbLoginData.put("url", dbUrl.getText());
                 //TODO: run DB test, change to main application panes
-                dbTest();
+                try {
+                    dbTest();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
 
             }
         });
@@ -51,30 +56,37 @@ public class DBLoginPane extends VBox {
         this.getChildren().addAll(errorMessage, dbUrl, dbName, dbUser, dbPass, login);
     }
 
-    private void dbTest() {
+    private void dbTest() throws SQLException {
         HashMap<String, Boolean> tests = new HashMap<>();
         tests.put("create", false);
         tests.put("write", false);
         tests.put("read", false);
         tests.put("modify", false);
         tests.put("delete", false);
-        if (Database.getInstance().dbTestQuery("CREATE TABLE test( testcolid INT AUTO_INCREMENT PRIMARY KEY, testcol VARCHAR(99));")) {
+
+
+        ResultSet result = Database.getInstance().md.getTables(null, null, "testclasstaskmaster", null);
+        if (result.next()) {
+            Database.getInstance().sqlQuery("DROP TABLE testclasstaskmaster;", true);
+            System.out.println("Table already exists, possibly due to failed test. Deleting table");
+        }
+        if (Database.getInstance().dbTestQuery("CREATE TABLE testclasstaskmaster( testcolid INT AUTO_INCREMENT PRIMARY KEY, testcol VARCHAR(99));")) {
             tests.put("create", true);
         }
 
-        if (Database.getInstance().dbTestQuery("INSERT INTO test VALUES(0,'this is a db test')")) {
+        if (Database.getInstance().dbTestQuery("INSERT INTO testclasstaskmaster VALUES(0,'this is a db test')")) {
             tests.put("write", true);
         }
 
-        if (Database.getInstance().dbTestQuery("SELECT * FROM test")) {
+        if (Database.getInstance().dbTestQuery("SELECT * FROM testclasstaskmaster")) {
             tests.put("read", true);
         }
 
-        if (Database.getInstance().dbTestQuery("UPDATE test SET testcol = 'different text in here' WHERE testcolid = 1")) {
+        if (Database.getInstance().dbTestQuery("UPDATE testclasstaskmaster SET testcol = 'different text in here' WHERE testcolid = 1")) {
             tests.put("modify", true);
         }
 
-        if (Database.getInstance().dbTestQuery("DELETE FROM test WHERE testcolid = 1")) {
+        if (Database.getInstance().dbTestQuery("DELETE FROM testclasstaskmaster WHERE testcolid = 1")) {
             tests.put("delete", true);
         }
 
@@ -86,7 +98,7 @@ public class DBLoginPane extends VBox {
         } else {
             System.out.println("All tests OK");
             MainPane.getInstance().switchPane();
-            Database.getInstance().sqlQuery("DROP TABLE test;", true);
+            Database.getInstance().sqlQuery("DROP TABLE testclasstaskmaster;", true);
             System.out.println("cleaning up db");
         }
 

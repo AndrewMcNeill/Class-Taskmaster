@@ -4,6 +4,7 @@ import java.sql.*;
 
 public class Database {
     public static Database instance;
+    public DatabaseMetaData md;
     private Connection connection;
 
     public static Database getInstance() {
@@ -20,6 +21,7 @@ public class Database {
                 connection = DriverManager.getConnection("jdbc:mysql://" + Const.dbLoginData.get("url") + "/"
                                 + Const.dbLoginData.get("name") + "?useSSL=false", Const.dbLoginData.get("username"), Const.dbLoginData.get("password"));
                 System.out.println("Created Connection");
+                md = connection.getMetaData();
             }
             catch(Exception e) {
                 e.printStackTrace();
@@ -43,9 +45,8 @@ public class Database {
     }
 
     public void createTable(String tableName, String tableQuery) throws SQLException {
-
         Statement sqlStatement;
-        DatabaseMetaData md = connection.getMetaData();
+
         ResultSet result = md.getTables(null, null, tableName, null);
         if (result.next()) {
             System.out.println(tableName + " table already exists");
@@ -55,6 +56,7 @@ public class Database {
             System.out.println("The "
                     + tableName + " table has been created");
         }
+
     }
 
     public boolean dbTestQuery(String sql) {
