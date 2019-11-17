@@ -26,21 +26,34 @@ public class Database {
             catch(Exception e) {
                 e.printStackTrace();
             }
-            /*
-            TODO: Create tables
+
             try {
-                createTable(Const.TABLE_LOCATION,
-                        Const.CREATE_TABLE_LOCATION;
-                createTable(Const.TABLE_COIN,
-                        Const.CREATE_TABLE_COIN);
-                createTable(Const.TABLE_CONDITION,
-                        Const.CREATE_TABLE_COIN_CONDITION;
-                createTable(Const.TABLE_ITEM,
-                        Const.CREATE_TABLE_ITEM);
+                createTable("tasks",
+                        "CREATE TABLE `tasks` (" +
+                                "taskid INT PRIMARY KEY, " +
+                                "completed BOOL, " +
+                                "title VARCHAR(255)," +
+                                "date DATE" +
+                                ");");
+                createTable("tags",
+                        "CREATE TABLE `tags` (" +
+                                "tagid INT PRIMARY KEY, " +
+                                "tagname varchar(255)" +
+                                ");");
+                createTable("tagstaskrelational",
+                        "CREATE TABLE `tagstaskrelational` (" +
+                                "taskid INT PRIMARY KEY, " +
+                                "tagid INT" +
+                                ");");
+                createTable("descriptions",
+                        "CREATE TABLE `tagstaskrelational` (" +
+                                "taskid INT PRIMARY KEY, " +
+                                "description TEXT" +
+                                ");");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-             */
+
         }
     }
 
