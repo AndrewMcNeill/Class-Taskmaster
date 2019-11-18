@@ -1,5 +1,6 @@
 package ui;
 
+import database.Database;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import models.Task;
@@ -24,7 +25,6 @@ public class TaskBox extends HBox {
         taskDate.setOnAction(e -> {
            date = taskDate.getValue();
 
-           System.out.println(date);
         });
 
         Button addTask = new Button("Add Task");
@@ -34,6 +34,7 @@ public class TaskBox extends HBox {
                 date = date == null ? LocalDate.now() : date;                                               //default to todays date if no date entered
                 Task task = new Task(0, taskTitle.getText(), date, "", tag, false);
                 Main.addTask(task);
+                Database.getInstance().insertTask(task);
                 clearUI();
             }
 

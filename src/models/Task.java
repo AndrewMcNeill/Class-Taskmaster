@@ -17,7 +17,7 @@ public class Task {
         this.id = id;
         this.title = title;
         this.date = date;
-        this.stringDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.stringDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         this.description = description;
         this.tag = tag;
         this.completed = completed;
