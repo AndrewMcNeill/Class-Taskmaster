@@ -28,34 +28,35 @@ public class Database {
             catch(Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
 
-            try {
-                createTable("tasks",
-                        "CREATE TABLE `tasks` (" +
-                                "taskid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
-                                "completed BOOL, " +
-                                "title VARCHAR(255)," +
-                                "date DATE" +
-                                ");");
-                createTable("tags",
-                        "CREATE TABLE `tags` (" +
-                                "tagid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
-                                "tagname varchar(255)" +
-                                ");");
-                createTable("tagstaskrelational",
-                        "CREATE TABLE `tagstaskrelational` (" +
-                                "taskid INT PRIMARY KEY, " +
-                                "tagid INT" +
-                                ");");
-                createTable("descriptions",
-                        "CREATE TABLE `descriptions` (" +
-                                "taskid INT PRIMARY KEY, " +
-                                "description TEXT" +
-                                ");");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
+    public void setupTables() {
+        try {
+            createTable("tasks",
+                    "CREATE TABLE `tasks` (" +
+                            "taskid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
+                            "completed BOOL, " +
+                            "title VARCHAR(255)," +
+                            "date DATE" +
+                            ");");
+            createTable("tags",
+                    "CREATE TABLE `tags` (" +
+                            "tagid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
+                            "tagname varchar(255)" +
+                            ");");
+            createTable("tagstaskrelational",
+                    "CREATE TABLE `tagstaskrelational` (" +
+                            "taskid INT PRIMARY KEY, " +
+                            "tagid INT" +
+                            ");");
+            createTable("descriptions",
+                    "CREATE TABLE `descriptions` (" +
+                            "taskid INT PRIMARY KEY, " +
+                            "description TEXT" +
+                            ");");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

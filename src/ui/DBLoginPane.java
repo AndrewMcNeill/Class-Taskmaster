@@ -46,6 +46,7 @@ public class DBLoginPane extends VBox {
                 //TODO: run DB test, change to main application panes
                 try {
                     dbTest();
+                    Database.getInstance().setupTables();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
