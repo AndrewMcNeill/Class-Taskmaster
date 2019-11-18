@@ -1,5 +1,7 @@
 package database;
 
+import models.Task;
+
 import java.sql.*;
 
 public class Database {
@@ -99,5 +101,29 @@ public class Database {
             e.printStackTrace();
         }
         return rs;
+    }
+
+    public void insertTask(Task task){
+
+        String addTask = "INSERT INTO `tasks` VALUES(0, false, '" + task.getTitle() + "', '" + task.getDate() +"');";
+
+
+        String addTag = "INSERT INTO `tags` VALUES(0, '" + task.getTag() + "');";
+
+
+        String addTaskTagRelation = "INSERT INTO tagstaskrelational VALUES((SELECT LAST_INSERT_ID() FROM tasks LIMIT 1),(SELECT tagid FROM tags WHERE tagname = '" +
+                task.getTag() + "' LIMIT 1));";
+
+
+
+        String addDescription = "INSERT INTO `descriptions` (`taskid`,`description`)" +
+                "VALUES" +
+                "((SELECT LAST_INSERT_ID() as taskid from tasks LIMIT 1),'" +
+                task.getDescription() + "');";
+
+        sqlQuery(addTask, true);
+        sqlQuery(addTag, true);
+        sqlQuery(addTaskTagRelation, true);
+        sqlQuery(addDescription, true);
     }
 }
