@@ -30,14 +30,14 @@ public class Database {
             try {
                 createTable("tasks",
                         "CREATE TABLE `tasks` (" +
-                                "taskid INT PRIMARY KEY, " +
+                                "taskid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
                                 "completed BOOL, " +
                                 "title VARCHAR(255)," +
                                 "date DATE" +
                                 ");");
                 createTable("tags",
                         "CREATE TABLE `tags` (" +
-                                "tagid INT PRIMARY KEY, " +
+                                "tagid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
                                 "tagname varchar(255)" +
                                 ");");
                 createTable("tagstaskrelational",
@@ -46,7 +46,7 @@ public class Database {
                                 "tagid INT" +
                                 ");");
                 createTable("descriptions",
-                        "CREATE TABLE `tagstaskrelational` (" +
+                        "CREATE TABLE `descriptions` (" +
                                 "taskid INT PRIMARY KEY, " +
                                 "description TEXT" +
                                 ");");
