@@ -108,8 +108,6 @@ public class Database {
         String addTask = "INSERT INTO `tasks` VALUES(0, false, '" + task.getTitle() + "', '" + task.getDate() +"');";
 
 
-        String addTag = "INSERT INTO `tags` VALUES(0, '" + task.getTag() + "');";
-
 
         String addTaskTagRelation = "INSERT INTO tagstaskrelational VALUES((SELECT LAST_INSERT_ID() FROM tasks LIMIT 1),(SELECT tagid FROM tags WHERE tagname = '" +
                 task.getTag() + "' LIMIT 1));";
@@ -122,8 +120,13 @@ public class Database {
                 task.getDescription() + "');";
 
         sqlQuery(addTask, true);
-        sqlQuery(addTag, true);
+
         sqlQuery(addTaskTagRelation, true);
         sqlQuery(addDescription, true);
+    }
+
+    public void insertTag(String tagName) {
+        String addTag = "INSERT INTO `tags` VALUES(0, '" + tagName + "');";
+        sqlQuery(addTag, true);
     }
 }

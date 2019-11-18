@@ -1,5 +1,6 @@
 package ui;
 
+import database.Database;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CustomMenuItem;
@@ -35,6 +36,7 @@ public class TagsButton {
                     Main.tagList.put(newTag.getText(), item);                       // put this tag item into the map
                     tagsButton.getItems().add(item);                                // add the item to the menu list
                     tagsButton.setText(item.getText());                             // set the text to the new tag by default
+                    Database.getInstance().insertTag(item.getText());
                     newTag.clear();                                                 // clear the field
                 }
             }
