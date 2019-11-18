@@ -123,6 +123,14 @@ public class Database {
                 task.getDescription() + "');";
 
         sqlQuery(addTask, true);
+
+        try {
+            ResultSet rs = sqlQuery("SELECT LAST_INSERT_ID() as taskid from tasks LIMIT 1", false);
+            rs.next();
+            task.setId(rs.getInt("taskid"));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         sqlQuery(addTag, true);
         sqlQuery(addTaskTagRelation, true);
         sqlQuery(addDescription, true);

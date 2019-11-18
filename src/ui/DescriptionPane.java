@@ -58,7 +58,7 @@ public class DescriptionPane extends VBox {
         taskDate.valueProperty().addListener((observableValue, oldVal, newVal) -> {
             if (!(this.task.getDate().equals(newVal))) {
                 this.task.setDate(taskDate.getValue());
-                this.task.setStringDate(taskDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                this.task.setStringDate(taskDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                 SummaryList.getInstance().refresh();
             }
         });
