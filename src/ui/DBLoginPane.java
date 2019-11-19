@@ -20,7 +20,7 @@ public class DBLoginPane extends VBox {
     private TextField dbPass   = new TextField();
     private TextField dbUrl    = new TextField();
     private Button login       = new Button("Login");
-    private Label errorMessage = new Label();
+    private Label errorMessage = new Label("Please log in");
 
     public static DBLoginPane getInstance() {
         if (DBLoginPane.instance == null) {
@@ -45,9 +45,10 @@ public class DBLoginPane extends VBox {
                 Const.dbLoginData.put("url", dbUrl.getText());
                 //TODO: run DB test, change to main application panes
                 try {
-                    dbTest();
-                    Database.getInstance().setupTables();
-                    MainPane.getInstance().switchPane();
+                    if (dbTest()) {
+                        Database.getInstance().setupTables();
+                        MainPane.getInstance().switchPane();
+                    }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -58,7 +59,8 @@ public class DBLoginPane extends VBox {
         this.getChildren().addAll(errorMessage, dbUrl, dbName, dbUser, dbPass, login);
     }
 
-    private void dbTest() throws SQLException {
+    private boolean dbTest() throws SQLException {
+        boolean passed = false;
         HashMap<String, Boolean> tests = new HashMap<>();
         tests.put("create", false);
         tests.put("write", false);
@@ -101,7 +103,8 @@ public class DBLoginPane extends VBox {
             System.out.println("All tests OK");
             Database.getInstance().sqlQuery("DROP TABLE testclasstaskmaster;", true);
             System.out.println("cleaning up db");
+            passed = true;
         }
-
+        return passed;
     }
 }
