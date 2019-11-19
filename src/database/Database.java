@@ -30,34 +30,38 @@ public class Database {
             catch(Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
 
-            try {
-                createTable("tasks",
-                        "CREATE TABLE `tasks` (" +
-                                "taskid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
-                                "completed BOOL, " +
-                                "title VARCHAR(255)," +
-                                "date DATE" +
-                                ");");
-                createTable("tags",
-                        "CREATE TABLE `tags` (" +
-                                "tagid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
-                                "tagname varchar(255)" +
-                                ");");
-                createTable("tagstaskrelational",
-                        "CREATE TABLE `tagstaskrelational` (" +
-                                "taskid INT PRIMARY KEY, " +
-                                "tagid INT" +
-                                ");");
-                createTable("descriptions",
-                        "CREATE TABLE `descriptions` (" +
-                                "taskid INT PRIMARY KEY, " +
-                                "description TEXT" +
-                                ");");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+    public void setupTables() {
+        try {
+            System.out.println("Creating tables..");
+            createTable("tasks",
+                    "CREATE TABLE `tasks` (" +
+                            "taskid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
+                            "completed BOOL, " +
+                            "title VARCHAR(255)," +
+                            "date DATE" +
+                            ");");
+            createTable("tags",
+                    "CREATE TABLE `tags` (" +
+                            "tagid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
+                            "tagname varchar(255)" +
+                            ");");
+            sqlQuery("INSERT into `tags` (tagid, tagname) VALUES (0, 'No Tag!')", true);
 
+            createTable("tagstaskrelational",
+                    "CREATE TABLE `tagstaskrelational` (" +
+                            "taskid INT PRIMARY KEY, " +
+                            "tagid INT" +
+                            ");");
+            createTable("descriptions",
+                    "CREATE TABLE `descriptions` (" +
+                            "taskid INT PRIMARY KEY, " +
+                            "description TEXT" +
+                            ");");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -122,6 +126,14 @@ public class Database {
                 task.getDescription() + "');";
 
         sqlQuery(addTask, true);
+
+        try {
+            ResultSet rs = sqlQuery("SELECT LAST_INSERT_ID() as taskid from tasks LIMIT 1", false);
+            rs.next();
+            task.setId(rs.getInt("taskid"));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
 
         sqlQuery(addTaskTagRelation, true);
         sqlQuery(addDescription, true);
