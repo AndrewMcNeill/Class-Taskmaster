@@ -13,8 +13,8 @@ import java.time.LocalDate;
 public class FilterButton extends HBox {
     private String where;
 
-    public FilterButton(String text) {
-        this.where = "1";
+    public FilterButton(String text, String where) {
+        this.where = where;
         Button button = new Button(text);
         getChildren().add(button);
 
