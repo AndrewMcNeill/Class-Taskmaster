@@ -9,6 +9,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import sample.Main;
 
+import javax.xml.crypto.Data;
+import java.sql.SQLException;
+
 public class TagsButton {
 
     MenuButton tagsButton;
@@ -17,9 +20,7 @@ public class TagsButton {
 
     TagsButton() {
         // create all previous stored tags on creation of new tag button
-        for (MenuItem item : Main.tagList.values()) {
-            tagsButton.getItems().add(item);
-        }
+        Database.getInstance().grabTags(Main.tagList);
 
         tagsButton = new MenuButton("Tags");
         tagsButton.focusedProperty().addListener((observableValue, aBoolean, t1) -> {

@@ -5,7 +5,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import models.Task;
 import sample.Main;
-
 import java.time.LocalDate;
 
 public class TaskBox extends HBox {
