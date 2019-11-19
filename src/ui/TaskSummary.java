@@ -6,6 +6,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import models.Task;
 
+import java.sql.SQLException;
+
 public class TaskSummary extends GridPane {
 
     private Task ownTask;

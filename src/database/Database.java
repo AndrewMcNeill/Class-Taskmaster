@@ -1,8 +1,10 @@
 package database;
 
+import javafx.scene.control.MenuItem;
 import models.Task;
 
 import java.sql.*;
+import java.util.HashMap;
 
 public class Database {
     public static Database instance;
@@ -128,5 +130,19 @@ public class Database {
     public void insertTag(String tagName) {
         String addTag = "INSERT INTO `tags` VALUES(0, '" + tagName + "');";
         sqlQuery(addTag, true);
+    }
+
+    public void grabTags(HashMap<String, MenuItem> tagList){
+        try {
+            ResultSet rs = sqlQuery("SELECT * from tags", false);
+            while (rs.next()) {
+                String tagname = (rs.getString("tagname"));
+                MenuItem item = new MenuItem(tagname);
+                tagList.put(tagname, item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

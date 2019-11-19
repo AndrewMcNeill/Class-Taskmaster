@@ -2,6 +2,8 @@ package ui;
 
 import javafx.scene.layout.BorderPane;
 
+import java.sql.SQLException;
+
 public class MainPane extends BorderPane {
     private static MainPane instance;
 
