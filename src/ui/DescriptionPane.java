@@ -70,10 +70,9 @@ public class DescriptionPane extends VBox {
             }
         });
 
-        taskDescription.textProperty().addListener((observableValue, oldVal, newVal) -> {
-            if(!(this.task.getDescription().equals(newVal))) {
+        taskDescription.focusedProperty().addListener((obs, oldVal, newVal)->{
+            if (!newVal) {
                 this.task.setDescription(taskDescription.getText());
-                SummaryList.getInstance().refresh();
             }
         });
         taskDescription.setMaxWidth(300);
