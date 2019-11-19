@@ -35,6 +35,7 @@ public class Database {
 
     public void setupTables() {
         try {
+            System.out.println("Creating tables..");
             createTable("tasks",
                     "CREATE TABLE `tasks` (" +
                             "taskid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
@@ -47,6 +48,8 @@ public class Database {
                             "tagid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
                             "tagname varchar(255)" +
                             ");");
+            sqlQuery("INSERT into `tags` (tagid, tagname) VALUES (0, 'No Tag!')", true);
+
             createTable("tagstaskrelational",
                     "CREATE TABLE `tagstaskrelational` (" +
                             "taskid INT PRIMARY KEY, " +
@@ -123,6 +126,15 @@ public class Database {
                 task.getDescription() + "');";
 
         sqlQuery(addTask, true);
+
+        try {
+            ResultSet rs = sqlQuery("SELECT LAST_INSERT_ID() as taskid from tasks LIMIT 1", false);
+            rs.next();
+            task.setId(rs.getInt("taskid"));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
         sqlQuery(addTaskTagRelation, true);
         sqlQuery(addDescription, true);
     }

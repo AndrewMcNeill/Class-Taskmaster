@@ -67,8 +67,6 @@ public class Task {
                 true
         );
         this.tag = tag;
-        //INSERT INTO tagstaskrelational VALUES((SELECT LAST_INSERT_ID() FROM tasks LIMIT 1),(SELECT tagid FROM tags WHERE tagname = '" +
-        //                task.getTag() + "' LIMIT 1))
     }
 
     public boolean isCompleted() {

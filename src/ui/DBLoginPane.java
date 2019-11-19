@@ -47,6 +47,7 @@ public class DBLoginPane extends VBox {
                 try {
                     dbTest();
                     Database.getInstance().setupTables();
+                    MainPane.getInstance().switchPane();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -98,7 +99,6 @@ public class DBLoginPane extends VBox {
             errorMessage.setText("Something went wrong, check the console!");
         } else {
             System.out.println("All tests OK");
-            MainPane.getInstance().switchPane();
             Database.getInstance().sqlQuery("DROP TABLE testclasstaskmaster;", true);
             System.out.println("cleaning up db");
         }
