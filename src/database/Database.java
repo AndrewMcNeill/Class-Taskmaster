@@ -2,8 +2,10 @@ package database;
 
 import javafx.scene.control.MenuItem;
 import models.Task;
+import sample.Main;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class Database {
@@ -143,6 +145,51 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public void grabAllTasks(){
+        try {
+            ResultSet allTasks = sqlQuery("SELECT * from tasks", false);
+            System.out.println("test");
+            while (allTasks.next()) {
+
+                //Grab taskid
+                int taskid = (allTasks.getInt("taskid"));
+
+                //Grab tags
+                String tagsQuery = "SELECT tagname FROM tags WHERE tagid = " +
+                        "(SELECT tagid FROM tagstaskrelational WHERE taskid = '" + taskid + "' LIMIT 1);";
+
+                System.out.println(tagsQuery);
+                ResultSet tagSet = sqlQuery(tagsQuery, false);
+                //Extract tags
+                tagSet.next();
+                String tag = (tagSet.getString("tagname"));
+                //Grab description
+                String descriptionQuery = "SELECT description FROM descriptions WHERE taskid = '" +
+                        taskid + "' LIMIT 1;";
+
+                System.out.println(descriptionQuery);
+                ResultSet descriptionSet = sqlQuery(descriptionQuery,false);
+                //Extract description
+                descriptionSet.next();
+                String description = (descriptionSet.getString("description"));
+                //Extract task data
+                String tasktitle = (allTasks.getString("title"));
+                LocalDate date = (allTasks.getDate("date").toLocalDate());
+                Boolean completed = (allTasks.getBoolean("completed"));
+
+
+                Task task = new Task(taskid, tasktitle, date,description,tag, completed);
+                Main.addTask(task);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void grabTask(Task task){
 
     }
 }
