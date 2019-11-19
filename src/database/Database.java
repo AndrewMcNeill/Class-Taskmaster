@@ -45,12 +45,13 @@ public class Database {
                             "title VARCHAR(255)," +
                             "date DATE" +
                             ");");
-            createTable("tags",
+            if (createTable("tags",
                     "CREATE TABLE `tags` (" +
                             "tagid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
                             "tagname varchar(255)" +
-                            ");");
-            sqlQuery("INSERT into `tags` (tagid, tagname) VALUES (0, 'No Tag!')", true);
+                            ");")) {
+                sqlQuery("INSERT into `tags` (tagid, tagname) VALUES (0, 'No Tag!')", true);
+            }
 
             createTable("tagstaskrelational",
                     "CREATE TABLE `tagstaskrelational` (" +
@@ -67,17 +68,19 @@ public class Database {
         }
     }
 
-    public void createTable(String tableName, String tableQuery) throws SQLException {
+    public boolean createTable(String tableName, String tableQuery) throws SQLException {
         Statement sqlStatement;
 
         ResultSet result = md.getTables(null, null, tableName, null);
         if (result.next()) {
             System.out.println(tableName + " table already exists");
+            return false;
         } else {
             sqlStatement = connection.createStatement();
             sqlStatement.execute(tableQuery);
             System.out.println("The "
                     + tableName + " table has been created");
+            return true;
         }
 
     }
