@@ -173,7 +173,6 @@ public class Database {
                 String tagsQuery = "SELECT tagname FROM tags WHERE tagid = " +
                         "(SELECT tagid FROM tagstaskrelational WHERE taskid = '" + taskid + "' LIMIT 1);";
 
-                System.out.println(tagsQuery);
                 ResultSet tagSet = sqlQuery(tagsQuery, false);
                 //Extract tags
                 tagSet.next();
@@ -182,7 +181,6 @@ public class Database {
                 String descriptionQuery = "SELECT description FROM descriptions WHERE taskid = '" +
                         taskid + "' LIMIT 1;";
 
-                System.out.println(descriptionQuery);
                 ResultSet descriptionSet = sqlQuery(descriptionQuery,false);
                 //Extract description
                 descriptionSet.next();

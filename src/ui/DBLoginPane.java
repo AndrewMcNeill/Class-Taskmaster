@@ -47,6 +47,7 @@ public class DBLoginPane extends VBox {
                 try {
                     if (dbTest()) {
                         Database.getInstance().setupTables();
+                        Database.getInstance().grabAllTasks();
                         MainPane.getInstance().switchPane();
                     }
                 } catch (SQLException ex) {
