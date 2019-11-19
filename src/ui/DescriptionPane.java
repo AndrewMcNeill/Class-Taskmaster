@@ -10,6 +10,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import models.Task;
+
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 
 public class DescriptionPane extends VBox {
