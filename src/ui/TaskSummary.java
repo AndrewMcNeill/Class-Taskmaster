@@ -19,6 +19,8 @@ public class TaskSummary extends GridPane {
         this.add(new Text(task.getStringDate()), 1, 1, 1, 1);
         Button done = new Button("✔");
         done.setMinWidth(30);
+        done.setStyle("-fx-background-color: " + (ownTask.isCompleted() ? "green" : "yellow"));
+
         this.add(done, 2, 0, 1, 2);
 
         ColumnConstraints col1 = new ColumnConstraints();
@@ -37,6 +39,11 @@ public class TaskSummary extends GridPane {
         this.setOnMouseClicked(e-> {
             this.requestFocus();
             DescriptionPane.getInstance().updateDesc(ownTask);
+        });
+
+        done.setOnMouseClicked(e -> {
+            ownTask.setCompleted(!ownTask.isCompleted());
+            done.setStyle("-fx-background-color: " + (ownTask.isCompleted() ? "green" : "yellow"));
         });
 
     }

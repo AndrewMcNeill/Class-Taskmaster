@@ -1,5 +1,7 @@
 package models;
 
+import database.Database;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -37,6 +39,9 @@ public class Task {
 
     public void setTitle(String title) {
         this.title = title;
+        Database.getInstance().sqlQuery(
+                "UPDATE `tasks` SET title = '" + title + "' WHERE taskid="+id+";",
+                true);
     }
 
     public LocalDate getDate() {
@@ -45,6 +50,7 @@ public class Task {
 
     public void setDate(LocalDate date) {
         this.date = date;
+        this.setStringDate(this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     }
 
     public String getTag() {
@@ -52,7 +58,17 @@ public class Task {
     }
 
     public void setTag(String tag) {
+        //TODO: Add an AND clause to the outside statement WHERE
+        // to add support for multiple tags
+        Database.getInstance().sqlQuery(
+                "UPDATE `tagstaskrelational` SET tagid = (" +
+                        "SELECT tagid FROM `tags` WHERE tagname = '" + tag + "'" +
+                        ") WHERE taskid="+id+";",
+                true
+        );
         this.tag = tag;
+        //INSERT INTO tagstaskrelational VALUES((SELECT LAST_INSERT_ID() FROM tasks LIMIT 1),(SELECT tagid FROM tags WHERE tagname = '" +
+        //                task.getTag() + "' LIMIT 1))
     }
 
     public boolean isCompleted() {
@@ -61,6 +77,11 @@ public class Task {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+        Database.getInstance().sqlQuery(
+                "UPDATE `tasks` SET completed = '" +
+                        (completed ? 1 : 0)
+                        + "' WHERE taskid="+id+";",
+                true);
     }
 
     public String getStringDate() {
@@ -69,6 +90,9 @@ public class Task {
 
     public void setStringDate(String stringDate) {
         this.stringDate = stringDate;
+        Database.getInstance().sqlQuery(
+                "UPDATE `tasks` SET date = '" + stringDate + "' WHERE taskid="+id+";",
+                true);
     }
 
     public String getDescription() {
@@ -77,6 +101,11 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+        Database.getInstance().sqlQuery(
+                "UPDATE `descriptions` SET description = '"+ description +"' " +
+                        "WHERE taskid = "+id+";",
+                true
+        );
     }
 }
 
