@@ -2,6 +2,8 @@ package ui;
 
 import javafx.scene.layout.BorderPane;
 
+import java.sql.SQLException;
+
 public class MainPane extends BorderPane {
     private static MainPane instance;
 
@@ -12,6 +14,11 @@ public class MainPane extends BorderPane {
     }
 
     private MainPane() {
+
+        this.setCenter(DBLoginPane.getInstance());
+    }
+
+    public void switchPane() {
         this.setLeft(FilterPane.getInstance());
         this.setCenter(SummaryPane.getInstance());
         this.setRight(DescriptionPane.getInstance());

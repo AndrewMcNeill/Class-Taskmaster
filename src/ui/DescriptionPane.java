@@ -10,6 +10,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import models.Task;
+
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 
 public class DescriptionPane extends VBox {
@@ -58,7 +60,6 @@ public class DescriptionPane extends VBox {
         taskDate.valueProperty().addListener((observableValue, oldVal, newVal) -> {
             if (!(this.task.getDate().equals(newVal))) {
                 this.task.setDate(taskDate.getValue());
-                this.task.setStringDate(taskDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
                 SummaryList.getInstance().refresh();
             }
         });
@@ -71,10 +72,9 @@ public class DescriptionPane extends VBox {
             }
         });
 
-        taskDescription.textProperty().addListener((observableValue, oldVal, newVal) -> {
-            if(!(this.task.getDescription().equals(newVal))) {
+        taskDescription.focusedProperty().addListener((obs, oldVal, newVal)->{
+            if (!newVal) {
                 this.task.setDescription(taskDescription.getText());
-                SummaryList.getInstance().refresh();
             }
         });
         taskDescription.setMaxWidth(300);

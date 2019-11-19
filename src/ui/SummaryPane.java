@@ -1,6 +1,5 @@
 package ui;
 
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 

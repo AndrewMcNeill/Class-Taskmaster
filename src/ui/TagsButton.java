@@ -1,5 +1,6 @@
 package ui;
 
+import database.Database;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CustomMenuItem;
@@ -7,6 +8,9 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import sample.Main;
+
+import javax.xml.crypto.Data;
+import java.sql.SQLException;
 
 public class TagsButton {
 
@@ -16,9 +20,7 @@ public class TagsButton {
 
     TagsButton() {
         // create all previous stored tags on creation of new tag button
-        for (MenuItem item : Main.tagList.values()) {
-            tagsButton.getItems().add(item);
-        }
+        Database.getInstance().grabTags(Main.tagList);
 
         tagsButton = new MenuButton("Tags");
         tagsButton.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
@@ -35,6 +37,7 @@ public class TagsButton {
                     Main.tagList.put(newTag.getText(), item);                       // put this tag item into the map
                     tagsButton.getItems().add(item);                                // add the item to the menu list
                     tagsButton.setText(item.getText());                             // set the text to the new tag by default
+                    Database.getInstance().insertTag(item.getText());
                     newTag.clear();                                                 // clear the field
                 }
             }
