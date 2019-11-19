@@ -166,7 +166,6 @@ public class Database {
     public void grabAllTasks(){
         try {
             ResultSet allTasks = sqlQuery("SELECT * from tasks", false);
-            System.out.println("test");
             while (allTasks.next()) {
 
                 //Grab taskid
