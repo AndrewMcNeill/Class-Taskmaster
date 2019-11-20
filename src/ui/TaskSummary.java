@@ -1,11 +1,14 @@
 package ui;
 
+import database.Database;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import models.Task;
 
+import javax.xml.crypto.Data;
 import java.sql.SQLException;
 
 public class TaskSummary extends GridPane {
@@ -20,9 +23,13 @@ public class TaskSummary extends GridPane {
         this.add(new Text(task.getTag()), 0, 1, 1, 1);
         this.add(new Text(task.getStringDate()), 1, 1, 1, 1);
         Button done = new Button("✔");
+        Button delete = new Button("X");
+        delete.setMinWidth(30);
         done.setMinWidth(30);
+        delete.setStyle("-fx-background-color: red");
         done.setStyle("-fx-background-color: " + (ownTask.isCompleted() ? "green" : "yellow"));
 
+        this.add(delete,3,0,1,2);
         this.add(done, 2, 0, 1, 2);
 
         ColumnConstraints col1 = new ColumnConstraints();
@@ -43,9 +50,14 @@ public class TaskSummary extends GridPane {
             DescriptionPane.getInstance().updateDesc(ownTask);
         });
 
-        done.setOnMouseClicked(e -> {
+        done.setOnMouseClicked((MouseEvent e) -> {
             ownTask.setCompleted(!ownTask.isCompleted());
             done.setStyle("-fx-background-color: " + (ownTask.isCompleted() ? "green" : "yellow"));
+        });
+
+        //Event handler for delete button, deletes task
+        delete.setOnMouseClicked((MouseEvent e) -> {
+            Database.getInstance().deleteTask(ownTask.getId());
         });
 
     }
