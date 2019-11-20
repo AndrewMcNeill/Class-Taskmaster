@@ -1,5 +1,6 @@
 package ui;
 
+import database.Database;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.DatePicker;
@@ -10,6 +11,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import models.Task;
+import sample.Main;
 
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
@@ -66,9 +68,11 @@ public class DescriptionPane extends VBox {
 
 
         tagsButton.tagsButton.textProperty().addListener((observableValue, oldVal, newVal) -> {
+            System.out.println("CHANGED STATE");
             if(!(this.task.getTag().equals(newVal))) {
                 this.task.setTag(tagsButton.tagsButton.getText());
-                SummaryList.getInstance().refresh();
+                Main.taskCollection.clear();
+                Database.getInstance().grabAllTasks(); //refresh the task list
             }
         });
 
