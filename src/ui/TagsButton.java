@@ -67,7 +67,11 @@ public class TagsButton {
         Label label = new Label(tagName);
         label.setOnMouseClicked(f->{tagsButton.setText(label.getText());});     // Create a listener, set the button text to the text from the tag item
         HBox hbox = new HBox();
-        hbox.getChildren().addAll(label, new DeleteButton(label));
+        if (tagName.equals("No Tag!")) {
+            hbox.getChildren().addAll(label);
+        } else {
+            hbox.getChildren().addAll(label, new DeleteButton(label));
+        }
         hbox.setSpacing(20);
         CustomMenuItem item = new CustomMenuItem(hbox);
         return item;
