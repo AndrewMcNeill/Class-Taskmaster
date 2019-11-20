@@ -1,12 +1,17 @@
 package database;
 
+import javafx.scene.control.CustomMenuItem;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.HBox;
 import models.Task;
 import sample.Main;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Database {
     public static Database instance;
@@ -149,13 +154,12 @@ public class Database {
         sqlQuery(addTag, true);
     }
 
-    public void grabTags(HashMap<String, MenuItem> tagList){
+    public void grabTags(Set<String> tagList){
         try {
             ResultSet rs = sqlQuery("SELECT * from tags", false);
             while (rs.next()) {
                 String tagname = (rs.getString("tagname"));
-                MenuItem item = new MenuItem(tagname);
-                tagList.put(tagname, item);
+                tagList.add(tagname);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -202,7 +206,14 @@ public class Database {
         }
     }
 
-    public void grabTask(Task task){
 
+
+    public void removeTag(String tagName) {
+        System.out.println("changing tags");
+        sqlQuery("UPDATE tagstaskrelational SET tagid = 1 WHERE tagid = (SELECT tagid FROM tags WHERE tagname = '"+ tagName +"');", true);
+        System.out.println("deleting tags");
+        sqlQuery("DELETE FROM tags WHERE tagname = '"+ tagName + "';", true);
+        Main.taskCollection.clear();
+        grabAllTasks();
     }
 }
