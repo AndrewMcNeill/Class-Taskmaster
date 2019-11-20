@@ -208,9 +208,7 @@ public class Database {
 
 
     public void removeTag(String tagName) {
-        System.out.println("changing tags");
         sqlQuery("UPDATE tagstaskrelational SET tagid = 1 WHERE tagid = (SELECT tagid FROM tags WHERE tagname = '"+ tagName +"');", true);
-        System.out.println("deleting tags");
         sqlQuery("DELETE FROM tags WHERE tagname = '"+ tagName + "';", true);
         Main.taskCollection.clear();
         grabAllTasks();

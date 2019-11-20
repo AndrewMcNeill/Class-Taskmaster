@@ -81,11 +81,10 @@ public class TagsButton {
         Label selfLabel;
         DeleteButton(Label selfLabel){
             this.selfLabel = selfLabel;
-            this.setText("\uD83D\uDDD1️");
+            this.setStyle("-fx-background-color: darkred");
+            this.setText("X");
             this.setOnMouseClicked(e->{
                 Main.tagList.remove(selfLabel.getText());
-                System.out.println("did something on " + selfLabel.getText());
-                System.out.println(Main.tagList);
                 updateTagList();
                 Database.getInstance().removeTag(selfLabel.getText());
             });
