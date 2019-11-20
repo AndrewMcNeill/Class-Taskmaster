@@ -6,6 +6,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import models.Task;
 import sample.Main;
+import ui.SummaryList;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -212,5 +213,28 @@ public class Database {
         sqlQuery("DELETE FROM tags WHERE tagname = '"+ tagName + "';", true);
         Main.taskCollection.clear();
         grabAllTasks();
+    }
+
+    /**
+     * Method deletes task when delete button is clicked
+     * @param taskid
+     */
+    public void deleteTask(int taskid){
+        //Queries to delete the task information from tasks and description
+        //Not deleting from tags, as we want to keep the tag.
+
+        String deleteTask = "DELETE FROM tasks WHERE taskid = " + taskid + ";";
+        String deleteDesc = "DELETE FROM descriptions WHERE taskid = " + taskid + ";";
+        String deleteTaskTagRelation = "DELETE FROM tagstaskrelational WHERE taskid = " + taskid + ";";
+
+        //Run sqlQueries
+        sqlQuery(deleteDesc,true);
+        sqlQuery(deleteTaskTagRelation, true);
+        sqlQuery(deleteTask, true);
+
+        //Refresh tasks after deletion
+        Main.taskCollection.clear();
+        grabAllTasks();
+        SummaryList.getInstance().refresh();
     }
 }
