@@ -55,6 +55,7 @@ public class TaskSummary extends GridPane {
             done.setStyle("-fx-background-color: " + (ownTask.isCompleted() ? "green" : "yellow"));
         });
 
+        //Event handler for delete button, deletes task
         delete.setOnMouseClicked((MouseEvent e) -> {
             Database.getInstance().deleteTask(ownTask.getId());
         });
