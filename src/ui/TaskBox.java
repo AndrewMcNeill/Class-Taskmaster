@@ -21,10 +21,7 @@ public class TaskBox extends HBox {
         taskDate.setEditable(false);
         taskDate.getEditor().setDisable(true);
         taskDate.setPromptText("Pick a Date...");
-        taskDate.setOnAction(e -> {
-           date = taskDate.getValue();
-
-        });
+        taskDate.setOnAction(e -> { date = taskDate.getValue(); });
 
         Button addTask = new Button("Add Task");
         addTask.setOnMouseClicked(e->{

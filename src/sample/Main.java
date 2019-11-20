@@ -2,6 +2,7 @@ package sample;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import models.Task;
@@ -9,11 +10,13 @@ import ui.MainPane;
 import ui.SummaryList;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main extends Application {
 
     public static ArrayList<Task> taskCollection = new ArrayList<Task>();
-    public static HashMap<String, MenuItem> tagList = new HashMap<>();
+    public static Set<String> tagList = new HashSet<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
