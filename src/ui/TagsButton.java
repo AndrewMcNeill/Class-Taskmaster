@@ -24,7 +24,7 @@ public class TagsButton {
     TagsButton() {
 
         // create all previous stored tags on creation of new tag button
-        Database.getInstance().grabTags(Main.tagList);
+
 
 
         tagsButton = new MenuButton("Tags");
@@ -42,6 +42,7 @@ public class TagsButton {
                     Database.getInstance().insertTag(newTag.getText());
                     tagsButton.setText(newTag.getText()); //set the buttons text *after* the tag has been created in the DB
                     newTag.clear();
+                    FilterPane.getInstance().f.updateTagList();
                 }
             }
         });
@@ -57,6 +58,7 @@ public class TagsButton {
     // recreate the list on click
     public void updateTagList() {
         tagsButton.getItems().clear();
+        //add the text box for making new tags
         tagsButton.getItems().add(new CustomMenuItem(newTag, false));
         for (String tag : Main.tagList){
             //System.out.println(tag);
