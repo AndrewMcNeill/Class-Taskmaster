@@ -55,7 +55,8 @@ public class DBLoginPane extends VBox {
                         Database.getInstance().grabAllTasks();
                         Database.getInstance().grabTags(Main.tagList);
                         MainPane.getInstance().switchPane();
-                        Credentials.save();
+                        if (saveLogin.isSelected())
+                            Credentials.save();
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
