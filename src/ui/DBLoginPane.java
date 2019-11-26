@@ -1,10 +1,12 @@
 package ui;
 
-import database.Const;
+import database.Credentials;
 import database.Database;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import sample.Main;
 
@@ -21,6 +23,9 @@ public class DBLoginPane extends VBox {
     private TextField dbUrl    = new TextField();
     private Button login       = new Button("Login");
     private Label errorMessage = new Label("Please log in");
+    private Label saveLoginLabel = new Label("Save login credentials");
+    private CheckBox saveLogin = new CheckBox();
+    private HBox saveLoginBox  = new HBox(saveLoginLabel, saveLogin);
 
     public static DBLoginPane getInstance() {
         if (DBLoginPane.instance == null) {
@@ -39,10 +44,10 @@ public class DBLoginPane extends VBox {
         login.setOnMouseClicked(e->{
             if (!dbName.getText().equals("") && !dbUser.getText().equals("") &&
             !dbPass.getText().equals("") && !dbUrl.getText().equals("")){
-                Const.dbLoginData.put("name", dbName.getText());
-                Const.dbLoginData.put("username", dbUser.getText());
-                Const.dbLoginData.put("password", dbPass.getText());
-                Const.dbLoginData.put("url", dbUrl.getText());
+                Credentials.dbLoginData.put("name", dbName.getText());
+                Credentials.dbLoginData.put("username", dbUser.getText());
+                Credentials.dbLoginData.put("password", dbPass.getText());
+                Credentials.dbLoginData.put("url", dbUrl.getText());
                 //TODO: run DB test, change to main application panes
                 try {
                     if (dbTest()) {
@@ -50,6 +55,8 @@ public class DBLoginPane extends VBox {
                         Database.getInstance().grabAllTasks();
                         Database.getInstance().grabTags(Main.tagList);
                         MainPane.getInstance().switchPane();
+                        if (saveLogin.isSelected())
+                            Credentials.save();
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -58,7 +65,7 @@ public class DBLoginPane extends VBox {
             }
         });
 
-        this.getChildren().addAll(errorMessage, dbUrl, dbName, dbUser, dbPass, login);
+        this.getChildren().addAll(errorMessage, dbUrl, dbName, dbUser, dbPass, login, saveLoginBox);
     }
 
     private boolean dbTest() throws SQLException {

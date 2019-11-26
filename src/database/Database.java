@@ -1,17 +1,11 @@
 package database;
 
-import javafx.scene.control.CustomMenuItem;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.HBox;
 import models.Task;
 import sample.Main;
 import ui.SummaryList;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Set;
 
 public class Database {
@@ -22,21 +16,28 @@ public class Database {
     public static Database getInstance() {
         if (Database.instance == null)
             Database.instance = new Database();
+        if (instance.connection == null)
+            instance = null;
         return Database.instance;
     }
 
     private Database() {
+        login();
+    }
+
+    public void login() {
         if(connection == null) {
             try {
-                System.out.println(Const.dbLoginData);
+                System.out.println(Credentials.dbLoginData);
                 Class.forName("com.mysql.jdbc.Driver");
-                connection = DriverManager.getConnection("jdbc:mysql://" + Const.dbLoginData.get("url") + "/"
-                                + Const.dbLoginData.get("name") + "?useSSL=false", Const.dbLoginData.get("username"), Const.dbLoginData.get("password"));
+                connection = DriverManager.getConnection("jdbc:mysql://" + Credentials.dbLoginData.get("url") + "/"
+                        + Credentials.dbLoginData.get("name") + "?useSSL=false", Credentials.dbLoginData.get("username"), Credentials.dbLoginData.get("password"));
                 System.out.println("Created Connection");
                 md = connection.getMetaData();
             }
             catch(Exception e) {
                 e.printStackTrace();
+                connection = null;
             }
         }
     }
