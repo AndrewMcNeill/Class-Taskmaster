@@ -27,7 +27,7 @@ public class FilterButton extends HBox {
     public void grabTasks() {
         try {
             Database db = Database.getInstance();
-            ResultSet allTasks = db.sqlQuery("SELECT * from tasks WHERE " + where, false);
+            ResultSet allTasks = db.sqlQuery("SELECT * from tasks WHERE " + where + " ORDER BY date ASC;", false);
             while (allTasks.next()) {
                 //Grab taskid
                 int taskid = (allTasks.getInt("taskid"));

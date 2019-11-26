@@ -170,7 +170,7 @@ public class Database {
 
     public void grabAllTasks(){
         try {
-            ResultSet allTasks = sqlQuery("SELECT * from tasks", false);
+            ResultSet allTasks = sqlQuery("SELECT * from tasks ORDER BY date ASC", false);
             while (allTasks.next()) {
 
                 //Grab taskid
