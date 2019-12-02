@@ -23,6 +23,7 @@ public class StatsPane extends BorderPane {
         backButton.setOnMouseClicked(e->{
             Main.changeScene(MainPane.getInstance());
         });
+        this.getChildren().add(backButton);
     }
 
 }
