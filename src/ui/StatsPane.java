@@ -21,6 +21,7 @@ public class StatsPane extends BorderPane implements Refreshable {
     private static StatsPane instance;
 
     LineChart<String, Number> lineChart;
+    PieChart pieChart;
 
 
     public static StatsPane getInstance() {
@@ -37,13 +38,16 @@ public class StatsPane extends BorderPane implements Refreshable {
         this.setBottom(backButton);
 
         final CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Day");
         final NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("Completed Tasks");
         lineChart = new LineChart<>(xAxis, yAxis);
         lineChart.getData().add(new XYChart.Series<>());
+        lineChart.getData().get(0).setName("Days");
         this.setRight(lineChart);
 
+        pieChart = new PieChart();
+        pieChart.setData(FXCollections.observableArrayList());
+        this.setLeft(pieChart);
 
 
 
@@ -56,7 +60,26 @@ public class StatsPane extends BorderPane implements Refreshable {
     }
 
     private void refreshPieChart() {
-
+        ObservableList<PieChart.Data> data = pieChart.getData();
+        data.clear();
+        String start_date   = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String end_date     = LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String query = "SELECT * FROM `tasks` WHERE date BETWEEN '" + start_date + "' AND '" + end_date + "';";
+        int complete_count      = 0;
+        int incomplete_count    = 0;
+        ResultSet result = Database.getInstance().sqlQuery(query, false);
+        try {
+            while(result.next()) {
+                if (result.getBoolean("completed")) {
+                    complete_count++;
+                } else {
+                    incomplete_count++;
+                }
+            }
+        } catch (SQLException e) { }
+        data.add(new PieChart.Data("complete", complete_count));
+        data.add(new PieChart.Data("incomplete", incomplete_count));
+        //pieChart.setData(data);
     }
 
     private void refreshLineChart() {
