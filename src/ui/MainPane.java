@@ -36,4 +36,8 @@ public class MainPane extends BorderPane {
         this.setCenter(SummaryPane.getInstance());
         this.setRight(DescriptionPane.getInstance());
     }
+
+    public void statisticsPane() {
+        this.setCenter(StatsPane.getInstance());
+    }
 }

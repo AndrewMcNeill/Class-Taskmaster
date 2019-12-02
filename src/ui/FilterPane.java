@@ -61,10 +61,15 @@ public class FilterPane extends VBox {
 
             String week = LocalDate.now().plusDays(7).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
+        Button statspane = new Button("Statistics");
+        statspane.setOnMouseClicked(e->{
+            Main.changeScene(StatsPane.getInstance());
+        });
+
         this.getChildren().addAll(
                 new FilterButton("Today","date = '" + today + "'"),
                 new FilterButton("Tomorrow","date = '" + tomorrow + "'"),
                 new FilterButton("Next 7 Days", "date BETWEEN '" + today + "' AND '" + week + "'"),
-                AllTasksButton,UncompletedTasksButton,BothTasksButton,CompletedTasksButton,s);
+                AllTasksButton,UncompletedTasksButton,BothTasksButton,CompletedTasksButton,s, statspane);
     }
 }
