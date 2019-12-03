@@ -22,6 +22,7 @@ public class FilterButton extends HBox {
             Main.taskCollection.clear();
             grabTasks();
         });
+        this.getStyleClass().add("filterbutton");
     }
 
     public void grabTasks() {
