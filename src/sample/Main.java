@@ -26,6 +26,7 @@ public class Main extends Application {
         Main.primaryStage = primaryStage;
         primaryStage.setTitle("Taskmaster");
         primaryStage.setScene(new Scene(MainPane.getInstance(), 960, 540 ));
+        primaryStage.getScene().getStylesheets().add("main.css");
         primaryStage.show();
     }
 
