@@ -14,9 +14,9 @@ public class FilterPane extends VBox {
     private static FilterPane instance;
     public static TagFilters tagFilters = new TagFilters();
     private static ScrollPane tagFilterScrollPane = new ScrollPane(tagFilters);
-    private Button completedTasksButton = new Button("Completed Tasks");
-    private Button uncompletedTasksButton = new Button("Uncompleted Tasks");
-    private Button bothTasksButton = new Button("All Tasks (Filtered) *");
+    private Button completedTasksButton = new Button("Completed");
+    private Button uncompletedTasksButton = new Button("Incomplete");
+    private Button bothTasksButton = new Button("Both");
     private Button allTasksButton = new Button("All Tasks");
 
     public static FilterPane getInstance() {
@@ -68,6 +68,6 @@ public class FilterPane extends VBox {
                 new FilterButton("Today","date = '" + today + "'"),
                 new FilterButton("Tomorrow","date = '" + tomorrow + "'"),
                 new FilterButton("Next 7 Days", "date BETWEEN '" + today + "' AND '" + week + "'"),
-                uncompletedTasksButton, bothTasksButton, completedTasksButton, tagFilterScrollPane, statspane);
+                tagFilterScrollPane, uncompletedTasksButton, completedTasksButton, bothTasksButton, statspane);
     }
 }
