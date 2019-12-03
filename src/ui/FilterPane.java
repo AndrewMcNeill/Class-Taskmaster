@@ -3,6 +3,7 @@ package ui;
 import database.Database;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import sample.Main;
@@ -27,7 +28,6 @@ public class FilterPane extends VBox {
 
     private FilterPane() {
         this.setId("FilterPane");
-        this.getChildren().add(new Text("Filter"));
 
         completedTasksButton.setOnMouseClicked(e -> {
                 SummaryList.getInstance().setDisplayMode("completed");
@@ -63,11 +63,22 @@ public class FilterPane extends VBox {
             StatsPane.getInstance().refresh();
         });
 
+        Region region1 = new Region(); region1.setId("filterpane_region1");
+        Region region2 = new Region(); region2.setId("filterpane_region2");
+        Region region3 = new Region(); region3.setId("filterpane_region3");
+        Region region4 = new Region(); region4.setId("filterpane_region4");
+
         this.getChildren().addAll(
                 allTasksButton,
+                region1,
                 new FilterButton("Today","date = '" + today + "'"),
                 new FilterButton("Tomorrow","date = '" + tomorrow + "'"),
                 new FilterButton("Next 7 Days", "date BETWEEN '" + today + "' AND '" + week + "'"),
-                tagFilterScrollPane, uncompletedTasksButton, completedTasksButton, bothTasksButton, statspane);
+                region2,
+                tagFilterScrollPane,
+                region3,
+                uncompletedTasksButton, completedTasksButton, bothTasksButton,
+                region4,
+                statspane);
     }
 }

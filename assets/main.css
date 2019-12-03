@@ -3,9 +3,30 @@
     -fx-background-color: blue;
 }
 
+#FilterPane ScrollPane {
+    -fx-padding: 0;
+}
+
+#filterpane_region1 {
+    -fx-pref-height: 20px;
+}
+#filterpane_region2 {
+    -fx-pref-height: 20px;
+}
+#filterpane_region3 {
+    -fx-pref-height: 20px;
+}
+#filterpane_region4 {
+    -fx-pref-height: 20px;
+}
+
 #FilterPane Button, .filterbutton {
     -fx-background-color: cadetblue;
     -fx-fill-width: true;
     -fx-max-width: 999999;
     -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+#FilterPane Button:hover, .filterbutton:hover {
+    -fx-background-color: aliceblue;
 }
