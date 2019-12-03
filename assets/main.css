@@ -1,3 +1,10 @@
-.filterbutton {
+
+#FilterPane {
+    -fx-background-color: blue;
+}
+
+#FilterPane Button, .filterbutton {
     -fx-background-color: cadetblue;
+    -fx-max-width: 999999;
+    -fx-border-radius: 0;
 }

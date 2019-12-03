@@ -1,17 +1,9 @@
 package ui;
 
 import database.Database;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import sample.Main;
-
-import javax.xml.crypto.Data;
-import java.sql.SQLException;
-import java.util.Collection;
-import java.util.HashMap;
 
 public class TagsButton {
 
@@ -42,7 +34,7 @@ public class TagsButton {
                     Database.getInstance().insertTag(newTag.getText());
                     tagsButton.setText(newTag.getText()); //set the buttons text *after* the tag has been created in the DB
                     newTag.clear();
-                    FilterPane.getInstance().f.updateTagList();
+                    FilterPane.getInstance().tagFilters.updateTagList();
                 }
             }
         });
