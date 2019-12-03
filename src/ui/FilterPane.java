@@ -64,6 +64,7 @@ public class FilterPane extends VBox {
         Button statspane = new Button("Statistics");
         statspane.setOnMouseClicked(e->{
             Main.changeScene(StatsPane.getInstance());
+            StatsPane.getInstance().refresh();
         });
 
         this.getChildren().addAll(
