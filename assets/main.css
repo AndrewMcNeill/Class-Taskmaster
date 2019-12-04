@@ -348,7 +348,14 @@ StatsPane Region {
 }
 
 StatsPane Button {
+    -fx-background-color: color2;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
 
+StatsPane Button:hover {
+    -fx-background-color: color1;
 }
 
 .chart {
@@ -382,13 +389,23 @@ StatsPane Button {
 
 .chart-series-line {
     -fx-stroke-width: 2px;
-    -fx-effect: null;
+    -fx-effect: none;
 }
 
+.default-color0.chart-series-line { -fx-stroke: white; }
+.default-color1.chart-series-line { -fx-stroke: white; }
 
 
-.default-color0.chart-series-line { -fx-stroke: color1 }
-.default-color1.chart-series-line { -fx-stroke: color1 }
+
+.chart-pie-label-line {
+    -fx-stroke: white;
+    -fx-fill: white;
+}
+
+.chart-pie-label {
+    -fx-fill: white;
+    -fx-font-size: 1em;
+}
 
 
 .default-color0.chart-pie { -fx-pie-color: color1; }
