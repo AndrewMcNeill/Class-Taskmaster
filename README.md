@@ -24,7 +24,7 @@ A statistics page is also available to view your task completion history within 
   
   On launch you will be requested to log in using your database credentials. Select the option to remember your credentials if you wish to do so.
   
-  ![login](https://user-images.githubusercontent.com/56166439/70125332-a597d600-1644-11ea-936e-c0d062f21b2c.PNG)
+  ![loginGif](https://user-images.githubusercontent.com/56166439/70163968-58d8ed00-168e-11ea-8523-e6eeafd8ecfb.gif)
 
   #### Create a Task and Tag
   
