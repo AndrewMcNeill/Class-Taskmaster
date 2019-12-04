@@ -3,6 +3,7 @@ package ui;
 import database.Database;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import models.Task;
 import sample.Main;
 import java.time.LocalDate;
@@ -17,16 +18,18 @@ public class TaskBox extends HBox {
 
     TaskBox() {
 
+        taskDate.setId("TaskDatePicker");
+        taskTitle.setId("TaskTitle");
+
         taskTitle.setPromptText("Add A Task...");
+        HBox.setHgrow(taskTitle, Priority.ALWAYS);
         taskDate.setEditable(false);
         taskDate.getEditor().setDisable(true);
         taskDate.setPromptText("Pick a Date...");
-        taskDate.setOnAction(e -> {
-           date = taskDate.getValue();
-
-        });
+        taskDate.setOnAction(e -> { date = taskDate.getValue(); });
 
         Button addTask = new Button("Add Task");
+        addTask.setId("AddTask");
         addTask.setOnMouseClicked(e->{
             if(!(taskTitle.getText().equals(""))) {
                 String tag = tagsButton.tagsButton.getText().equals("Tags") ? "No Tag!" : tagsButton.tagsButton.getText();     //default to no tag if isnt chosen

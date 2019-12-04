@@ -1,49 +1,50 @@
 package ui;
 
 import database.Database;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.CustomMenuItem;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import sample.Main;
-
-import javax.xml.crypto.Data;
-import java.sql.SQLException;
 
 public class TagsButton {
 
     MenuButton tagsButton;
-    private MenuItem item;
+    private CustomMenuItem item;
+    private CustomMenuItem addTag;
     private TextField newTag;
+    private Button deleteTag = new Button("X");
+    public boolean ready = false;
 
     TagsButton() {
+
         // create all previous stored tags on creation of new tag button
-        Database.getInstance().grabTags(Main.tagList);
+
+
 
         tagsButton = new MenuButton("Tags");
+        tagsButton.setId("TagsButton");
         tagsButton.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
             updateTagList();
         });
 
         newTag = new TextField();
+        newTag.setId("TagsInputField");
         newTag.setPromptText("+ New Tag");
         newTag.setOnAction(e->{
-            if (!Main.tagList.containsKey(newTag.getText())){                       // if the tag doesnt exist in the map
-                if (!newTag.getText().equals("")) {                                 // if the tag is not empty
-                    item = new MenuItem(newTag.getText());                          // create a new menu item with the text from the newTag Field
-                    item.setOnAction(f->{tagsButton.setText(item.getText());});     // Create a listener, set the button text to the text from the tag item
-                    Main.tagList.put(newTag.getText(), item);                       // put this tag item into the map
-                    tagsButton.getItems().add(item);                                // add the item to the menu list
-                    tagsButton.setText(item.getText());                             // set the text to the new tag by default
-                    Database.getInstance().insertTag(item.getText());
-                    newTag.clear();                                                 // clear the field
+            if (!Main.tagList.contains(newTag.getText())){
+                if (!newTag.getText().equals("")) {
+                    tagsButton.getItems().add(makeNewTagButton(newTag.getText()));
+                    Main.tagList.add(newTag.getText());
+                    Database.getInstance().insertTag(newTag.getText());
+                    tagsButton.setText(newTag.getText()); //set the buttons text *after* the tag has been created in the DB
+                    newTag.clear();
+                    FilterPane.getInstance().tagFilters.updateTagList();
                 }
             }
         });
 
-        CustomMenuItem addTag = new CustomMenuItem(newTag, false);
+        addTag = new CustomMenuItem(newTag, false);
+        addTag.setId("TagInputWrapper");
         tagsButton.getItems().add(addTag);
     }
 
@@ -52,12 +53,45 @@ public class TagsButton {
     }
 
     // recreate the list on click
-    private void updateTagList() {
+    public void updateTagList() {
         tagsButton.getItems().clear();
-        tagsButton.getItems().add(new CustomMenuItem(newTag, false));
-        for (MenuItem item : Main.tagList.values()){
-            item.setOnAction(f->{tagsButton.setText(item.getText());});
-            tagsButton.getItems().add(item);
+        //add the text box for making new tags
+        tagsButton.getItems().add(addTag);
+        for (String tag : Main.tagList){
+            //System.out.println(tag);
+            tagsButton.getItems().add(makeNewTagButton(tag));
         }
     }
+
+    public CustomMenuItem makeNewTagButton(String tagName) {
+        Label label = new Label(tagName);
+        label.setOnMouseClicked(f->{tagsButton.setText(label.getText());});     // Create a listener, set the button text to the text from the tag item
+        HBox hbox = new HBox();
+        if (tagName.equals("No Tag!")) {
+            hbox.getChildren().addAll(label);
+        } else {
+            hbox.getChildren().addAll(new DeleteButton(label), label);
+        }
+        hbox.setSpacing(20);
+        CustomMenuItem item = new CustomMenuItem(hbox);
+        item.setId("Tag");
+        return item;
+    }
+    class DeleteButton extends Label {
+
+        Label selfLabel;
+        DeleteButton(Label selfLabel){
+            this.selfLabel = selfLabel;
+            this.setId("DeleteTagsButton");
+            this.setOnMouseClicked(e->{
+                Main.tagList.remove(selfLabel.getText());
+                tagsButton.setText("No Tag!");
+                updateTagList();
+                Database.getInstance().removeTag(selfLabel.getText());
+            });
+        }
+    }
+
 }
+
+

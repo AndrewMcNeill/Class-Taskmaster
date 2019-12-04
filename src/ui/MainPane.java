@@ -1,8 +1,13 @@
 package ui;
 
+import database.Credentials;
+import database.Database;
 import javafx.scene.layout.BorderPane;
+import sample.Main;
 
-import java.sql.SQLException;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MainPane extends BorderPane {
     private static MainPane instance;
@@ -14,13 +19,25 @@ public class MainPane extends BorderPane {
     }
 
     private MainPane() {
-
-        this.setCenter(DBLoginPane.getInstance());
+        Credentials.load();
+        Database db = Database.getInstance();
+        if (db == null)
+            this.setCenter(DBLoginPane.getInstance());
+        else {
+            Database.getInstance().setupTables();
+            Database.getInstance().grabAllTasks();
+            Database.getInstance().grabTags(Main.tagList);
+            switchPane();
+        }
     }
 
     public void switchPane() {
         this.setLeft(FilterPane.getInstance());
         this.setCenter(SummaryPane.getInstance());
         this.setRight(DescriptionPane.getInstance());
+    }
+
+    public void statisticsPane() {
+        this.setCenter(StatsPane.getInstance());
     }
 }

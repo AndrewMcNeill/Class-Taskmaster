@@ -1,10 +1,11 @@
 package ui;
 
-import database.Const;
+import database.Credentials;
 import database.Database;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import sample.Main;
 
@@ -17,10 +18,13 @@ public class DBLoginPane extends VBox {
     private static DBLoginPane instance;
     private TextField dbName   = new TextField();
     private TextField dbUser   = new TextField();
-    private TextField dbPass   = new TextField();
+    private PasswordField dbPass   = new PasswordField();
     private TextField dbUrl    = new TextField();
     private Button login       = new Button("Login");
-    private Label errorMessage = new Label("Please log in");
+    private Label errorMessage = new Label();
+    private Label saveLoginLabel = new Label("Remember me");
+    private CheckBox saveLogin = new CheckBox();
+    private HBox saveLoginBox  = new HBox(saveLoginLabel, saveLogin);
 
     public static DBLoginPane getInstance() {
         if (DBLoginPane.instance == null) {
@@ -30,7 +34,28 @@ public class DBLoginPane extends VBox {
     }
 
     private DBLoginPane() {
-        this.setStyle("-fx-background-color: honeydew");
+        this.setId("DBLoginPane");
+        this.setAlignment(Pos.CENTER);
+        this.setSpacing(20);
+        Label logo = new Label();
+        logo.setId("Logo");
+        saveLoginLabel.setId("saveLoginLabel");
+        saveLogin.setId("saveLoginButton");
+        dbName.setId("dbInfo");
+        dbUser.setId("dbInfo");
+        dbPass.setId("dbInfo");
+        dbUrl.setId("dbInfo");
+        login.setId("loginButton");
+
+        dbName.setMaxWidth(300);
+        dbUser.setMaxWidth(300);
+        dbPass.setMaxWidth(300);
+        dbUrl.setMaxWidth(300);
+        saveLoginBox.setMaxWidth(300);
+        saveLoginBox.setAlignment(Pos.CENTER);
+        saveLoginBox.setSpacing(20);
+        login.setMinSize(300, 60);
+
         dbName.setPromptText("Database name");
         dbUser.setPromptText("Username");
         dbPass.setPromptText("Password");
@@ -39,16 +64,19 @@ public class DBLoginPane extends VBox {
         login.setOnMouseClicked(e->{
             if (!dbName.getText().equals("") && !dbUser.getText().equals("") &&
             !dbPass.getText().equals("") && !dbUrl.getText().equals("")){
-                Const.dbLoginData.put("name", dbName.getText());
-                Const.dbLoginData.put("username", dbUser.getText());
-                Const.dbLoginData.put("password", dbPass.getText());
-                Const.dbLoginData.put("url", dbUrl.getText());
+                Credentials.dbLoginData.put("name", dbName.getText());
+                Credentials.dbLoginData.put("username", dbUser.getText());
+                Credentials.dbLoginData.put("password", dbPass.getText());
+                Credentials.dbLoginData.put("url", dbUrl.getText());
                 //TODO: run DB test, change to main application panes
                 try {
                     if (dbTest()) {
                         Database.getInstance().setupTables();
                         Database.getInstance().grabAllTasks();
+                        Database.getInstance().grabTags(Main.tagList);
                         MainPane.getInstance().switchPane();
+                        if (saveLogin.isSelected())
+                            Credentials.save();
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -57,7 +85,13 @@ public class DBLoginPane extends VBox {
             }
         });
 
-        this.getChildren().addAll(errorMessage, dbUrl, dbName, dbUser, dbPass, login);
+        VBox input = new VBox();
+        input.setSpacing(20);
+        input.setPadding(new Insets(20,0,0,0));
+        input.getChildren().addAll(errorMessage, dbUrl, dbName, dbUser, dbPass, saveLoginBox, login);
+        HBox all = new HBox();
+        all.getChildren().addAll(logo, input);
+        this.getChildren().addAll(all);
     }
 
     private boolean dbTest() throws SQLException {

@@ -13,9 +13,7 @@ public class SummaryPane extends VBox {
     }
 
     private SummaryPane() {
-        this.setStyle("-fx-background-color: bisque");
         this.getChildren().add(new TaskBox());
-        this.getChildren().add(new Text("Summary"));
         this.getChildren().add(SummaryList.getInstance());
     }
 }

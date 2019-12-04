@@ -1,12 +1,12 @@
 package database;
 
-import javafx.scene.control.MenuItem;
 import models.Task;
 import sample.Main;
+import ui.SummaryList;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.Set;
 
 public class Database {
     public static Database instance;
@@ -16,21 +16,28 @@ public class Database {
     public static Database getInstance() {
         if (Database.instance == null)
             Database.instance = new Database();
+        if (instance.connection == null)
+            instance = null;
         return Database.instance;
     }
 
     private Database() {
+        login();
+    }
+
+    public void login() {
         if(connection == null) {
             try {
-                System.out.println(Const.dbLoginData);
+                System.out.println(Credentials.dbLoginData);
                 Class.forName("com.mysql.jdbc.Driver");
-                connection = DriverManager.getConnection("jdbc:mysql://" + Const.dbLoginData.get("url") + "/"
-                                + Const.dbLoginData.get("name") + "?useSSL=false", Const.dbLoginData.get("username"), Const.dbLoginData.get("password"));
+                connection = DriverManager.getConnection("jdbc:mysql://" + Credentials.dbLoginData.get("url") + "/"
+                        + Credentials.dbLoginData.get("name") + "?useSSL=false", Credentials.dbLoginData.get("username"), Credentials.dbLoginData.get("password"));
                 System.out.println("Created Connection");
                 md = connection.getMetaData();
             }
             catch(Exception e) {
                 e.printStackTrace();
+                connection = null;
             }
         }
     }
@@ -149,13 +156,12 @@ public class Database {
         sqlQuery(addTag, true);
     }
 
-    public void grabTags(HashMap<String, MenuItem> tagList){
+    public void grabTags(Set<String> tagList){
         try {
             ResultSet rs = sqlQuery("SELECT * from tags", false);
             while (rs.next()) {
                 String tagname = (rs.getString("tagname"));
-                MenuItem item = new MenuItem(tagname);
-                tagList.put(tagname, item);
+                tagList.add(tagname);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -165,8 +171,7 @@ public class Database {
 
     public void grabAllTasks(){
         try {
-            ResultSet allTasks = sqlQuery("SELECT * from tasks", false);
-            System.out.println("test");
+            ResultSet allTasks = sqlQuery("SELECT * from tasks ORDER BY date ASC", false);
             while (allTasks.next()) {
 
                 //Grab taskid
@@ -202,7 +207,35 @@ public class Database {
         }
     }
 
-    public void grabTask(Task task){
 
+
+    public void removeTag(String tagName) {
+        sqlQuery("UPDATE tagstaskrelational SET tagid = 1 WHERE tagid = (SELECT tagid FROM tags WHERE tagname = '"+ tagName +"');", true);
+        sqlQuery("DELETE FROM tags WHERE tagname = '"+ tagName + "';", true);
+        Main.taskCollection.clear();
+        grabAllTasks();
+    }
+
+    /**
+     * Method deletes task when delete button is clicked
+     * @param taskid
+     */
+    public void deleteTask(int taskid){
+        //Queries to delete the task information from tasks and description
+        //Not deleting from tags, as we want to keep the tag.
+
+        String deleteTask = "DELETE FROM tasks WHERE taskid = " + taskid + ";";
+        String deleteDesc = "DELETE FROM descriptions WHERE taskid = " + taskid + ";";
+        String deleteTaskTagRelation = "DELETE FROM tagstaskrelational WHERE taskid = " + taskid + ";";
+
+        //Run sqlQueries
+        sqlQuery(deleteDesc,true);
+        sqlQuery(deleteTaskTagRelation, true);
+        sqlQuery(deleteTask, true);
+
+        //Refresh tasks after deletion
+        Main.taskCollection.clear();
+        grabAllTasks();
+        SummaryList.getInstance().refresh();
     }
 }
