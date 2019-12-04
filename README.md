@@ -1,6 +1,6 @@
 # Taskmaster
 
-TaskMaster is a to-do / task management application that allows you to create tasks with a chosen due date and a tag. You may organize all of your tasks through filters such as all/completed/uncompleted tasks today, tasks tomorrow, tasks within the next 7 days, aswell as by the tag names created.
+TaskMaster is a to-do / task management application that allows you to create tasks with a chosen due date and a tag. You may organize all  your tasks through filters such as all/completed/uncompleted tasks today, tasks tomorrow, tasks within the next 7 days, as well as by the tag names created.
 
 Once created, a task may be selected to add a description to, as well as alter the name, due date and tags of the selected task.
 
@@ -14,7 +14,7 @@ A statistics page is also available to view your task completion history within 
   ```
   username@workstationname:~$ git clone https://github.com/AndrewMcNeill/Class-Taskmaster.git
   ```
-  Or you may download the .zip file.
+  Or you may download the **.zip** file.
   
   Load the project inside of your preferred Java IDE.
   
@@ -32,13 +32,13 @@ A statistics page is also available to view your task completion history within 
   
   #### Edit Task
   
-  Click the task to add a description and change additional details
+  Click the task to add a description and change additional details.
   
   ![editTask](https://user-images.githubusercontent.com/56166439/70126532-4091af80-1647-11ea-8e27-79e7609adc8a.gif)
   
   #### Statistics
   
-  Find the statistics by clicking the statistics button
+  Find the statistics by clicking the statistics button.
   
   ![statistics](https://user-images.githubusercontent.com/56166439/70125888-c14fac00-1645-11ea-9f76-f35994a996dd.gif)
   
@@ -53,11 +53,11 @@ A statistics page is also available to view your task completion history within 
 | -------------    | --------------------------------------------------- | ----------------------------------- |
 | Drew Brooks      | [DrewBrooks](https://github.com/DrewBrooks)         | w0726128@myscc.ca                   |
 | Andrew McNeill   | [AndrewMcNeill](https://github.com/AndrewMcNeill)   | andrewjndmcneill@gmail.com          |
-| Thomas Racz      | [ThomasRacz](https://github.com/ThomasRacz)         |                                     |
+| Thomas Racz      | [ThomasRacz](https://github.com/ThomasRacz)         | w0726059@myscc.ca                   |
 
 ## License
 
-This project is licensed under the MIT License - see the ![license.md](https://github.com/AndrewMcNeill/Class-Taskmaster/blob/new/readme/LICENSE) file for details
+This project is licensed under the MIT License - see the ![license.md](https://github.com/AndrewMcNeill/Class-Taskmaster/blob/new/readme/LICENSE) file for details.
 
 ## Acknowledgements
 
