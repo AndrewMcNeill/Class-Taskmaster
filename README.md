@@ -55,6 +55,9 @@ A statistics page is also available to view your task completion history within 
 | Andrew McNeill   | [AndrewMcNeill](https://github.com/AndrewMcNeill)   | andrewjndmcneill@gmail.com          |
 | Thomas Racz      | [ThomasRacz](https://github.com/ThomasRacz)         |                                     |
 
+## License
+
+This project is licensed under the MIT License - see the ![license.md](https://github.com/AndrewMcNeill/Class-Taskmaster/blob/new/readme/LICENSE) file for details
 
 ## Acknowledgements
 
