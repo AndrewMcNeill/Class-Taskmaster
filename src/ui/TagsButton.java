@@ -87,6 +87,7 @@ public class TagsButton {
                 Main.tagList.remove(selfLabel.getText());
                 tagsButton.setText("No Tag!");
                 updateTagList();
+                FilterPane.getInstance().tagFilters.updateTagList();
                 Database.getInstance().removeTag(selfLabel.getText());
             });
         }
