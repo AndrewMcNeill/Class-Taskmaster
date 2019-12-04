@@ -8,6 +8,7 @@ import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import models.Refreshable;
 import sample.Main;
 
@@ -36,18 +37,24 @@ public class StatsPane extends BorderPane implements Refreshable {
             Main.changeScene(MainPane.getInstance());
         });
         this.setBottom(backButton);
+        this.setTop(new Region());
 
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("Completed Tasks");
         lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle("The past week");
         lineChart.getData().add(new XYChart.Series<>());
         lineChart.getData().get(0).setName("Days");
         this.setRight(lineChart);
 
         pieChart = new PieChart();
+        pieChart.setTitle("The next month");
         pieChart.setData(FXCollections.observableArrayList());
         this.setLeft(pieChart);
+
+        pieChart.setLegendVisible(false);
+        lineChart.setLegendVisible(false);
 
 
 

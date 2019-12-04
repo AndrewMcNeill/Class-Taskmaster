@@ -194,3 +194,62 @@ TaskSummary * {
     -fx-background-color: #d1cb8b;
     -fx-text-fill: color3;
 }
+
+/*  Stats  */
+
+StatsPane {
+    -fx-background-color: color3;
+}
+
+StatsPane Region {
+    -fx-pref-height: 20px;
+}
+
+StatsPane Button {
+
+}
+
+.chart {
+    -fx-background-color: color3;
+}
+
+.chart-content {
+    -fx-background-color: color3;
+    -fx-tick-mark-visible: false;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-title {
+    -fx-text-fill: white;
+    -fx-font-size: 1.6em;
+}
+
+.axis-label {
+    -fx-text-fill: white;
+}
+
+.axis {
+    -fx-font-size: 1.1em;
+    -fx-tick-label-fill: white;
+    -fx-tick-length: 20;
+    -fx-minor-tick-length: 0;
+}
+
+.chart-series-line {
+    -fx-stroke-width: 2px;
+    -fx-effect: null;
+}
+
+
+
+.default-color0.chart-series-line { -fx-stroke: color1 }
+.default-color1.chart-series-line { -fx-stroke: color1 }
+
+
+.default-color0.chart-pie { -fx-pie-color: color1; }
+.default-color1.chart-pie { -fx-pie-color: color2; }
+.default-color2.chart-pie { -fx-pie-color: color1; }
+.default-color3.chart-pie { -fx-pie-color: color2; }

@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import models.Task;
 
@@ -23,7 +24,7 @@ public class TaskSummary extends GridPane {
         this.add(new Label(task.getTag()), 0, 1, 1, 1);
         this.add(new Label(task.getStringDate()), 1, 1, 1, 1);
         Button done = new Button("✔");
-        Button delete = new Button("X");
+        Button delete = new Button("");
         delete.getStyleClass().add("delete");
         delete.setMinWidth(30);
         //delete.setStyle("-fx-background-color: red");
@@ -33,9 +34,8 @@ public class TaskSummary extends GridPane {
         this.add(done, 2, 0, 1, 2);
 
         ColumnConstraints col1 = new ColumnConstraints();
-        col1.setFillWidth(true);
-        col1.setPrefWidth(99999);
-        this.getColumnConstraints().add(col1);
+        col1.setHgrow(Priority.ALWAYS);
+        this.getColumnConstraints().addAll(col1);
 
         this.setOnMouseClicked(e-> {
             this.requestFocus();
