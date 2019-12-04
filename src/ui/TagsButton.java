@@ -1,6 +1,7 @@
 package ui;
 
 import database.Database;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import sample.Main;
@@ -9,6 +10,7 @@ public class TagsButton {
 
     MenuButton tagsButton;
     private CustomMenuItem item;
+    private CustomMenuItem addTag;
     private TextField newTag;
     private Button deleteTag = new Button("X");
     public boolean ready = false;
@@ -20,11 +22,13 @@ public class TagsButton {
 
 
         tagsButton = new MenuButton("Tags");
+        tagsButton.setId("TagsButton");
         tagsButton.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
             updateTagList();
         });
 
         newTag = new TextField();
+        newTag.setId("TagsInputField");
         newTag.setPromptText("+ New Tag");
         newTag.setOnAction(e->{
             if (!Main.tagList.contains(newTag.getText())){
@@ -39,7 +43,8 @@ public class TagsButton {
             }
         });
 
-        CustomMenuItem addTag = new CustomMenuItem(newTag, false);
+        addTag = new CustomMenuItem(newTag, false);
+        addTag.setId("TagInputWrapper");
         tagsButton.getItems().add(addTag);
     }
 
@@ -51,7 +56,7 @@ public class TagsButton {
     public void updateTagList() {
         tagsButton.getItems().clear();
         //add the text box for making new tags
-        tagsButton.getItems().add(new CustomMenuItem(newTag, false));
+        tagsButton.getItems().add(addTag);
         for (String tag : Main.tagList){
             //System.out.println(tag);
             tagsButton.getItems().add(makeNewTagButton(tag));
@@ -65,10 +70,11 @@ public class TagsButton {
         if (tagName.equals("No Tag!")) {
             hbox.getChildren().addAll(label);
         } else {
-            hbox.getChildren().addAll(label, new DeleteButton(label));
+            hbox.getChildren().addAll(new DeleteButton(label), label);
         }
         hbox.setSpacing(20);
         CustomMenuItem item = new CustomMenuItem(hbox);
+        item.setId("Tag");
         return item;
     }
     class DeleteButton extends Label {
@@ -76,8 +82,7 @@ public class TagsButton {
         Label selfLabel;
         DeleteButton(Label selfLabel){
             this.selfLabel = selfLabel;
-            this.setStyle("-fx-background-color: darkred");
-            this.setText("X");
+            this.setId("DeleteTagsButton");
             this.setOnMouseClicked(e->{
                 Main.tagList.remove(selfLabel.getText());
                 tagsButton.setText("No Tag!");

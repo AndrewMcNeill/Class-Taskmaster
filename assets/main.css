@@ -1,3 +1,9 @@
+* {
+    color1: #808096;
+    color2: #646475;
+    color3: #414150;
+    color4: #33333d;
+}
 
 #FilterPane {
     -fx-background-color: blue;
@@ -30,3 +36,81 @@
 #FilterPane Button:hover, .filterbutton:hover {
     -fx-background-color: aliceblue;
 }
+
+#DeleteTagsButton {
+    -fx-graphic: url("deleteimage.png");
+}
+
+#DeleteTagsButton:hover{
+    -fx-graphic: url("deleteimagehighlight.png");
+}
+
+#Tag:hover{
+    -fx-background-color: #646475;
+}
+
+#TagsInputField {
+    -fx-background-color: #33333d;
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #646475;
+}
+
+#TagInputWrapper:hover {
+    -fx-background-color: #33333d;
+}
+
+#TagsButton .label {
+    -fx-text-fill: #FFFFFF;
+}
+
+#TagsButton {
+    -fx-background-color: #414150;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.context-menu {
+    -fx-background-color: #33333d;
+    -fx-text-fill: #FFFFFF;
+}
+.context-menu:hover {
+    -fx-background-color: #33333d;
+}
+
+#TagsButton:hover {
+    -fx-background-color: #33333d;
+}
+
+#TaskDatePicker {
+    -fx-background-color: #414150;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+#TagsDatePicker > .text-field {
+    -fx-text-fill: #FFFFFF;
+}
+
+#TaskDatePicker > .arrow-button {
+    -fx-padding: 0px;
+}
+
+#TaskDatePicker > .arrow-button > .arrow {
+    -fx-padding: 0px;
+}
+
+#AddTask {
+    -fx-background-color: #414150;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: #FFFFFF;
+}
+
+#TaskTitle {
+    -fx-background-color: #33333d;
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #c8cbc5;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+

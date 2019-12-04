@@ -17,6 +17,9 @@ public class TaskBox extends HBox {
 
     TaskBox() {
 
+        taskDate.setId("TaskDatePicker");
+        taskTitle.setId("TaskTitle");
+
         taskTitle.setPromptText("Add A Task...");
         taskDate.setEditable(false);
         taskDate.getEditor().setDisable(true);
@@ -24,6 +27,7 @@ public class TaskBox extends HBox {
         taskDate.setOnAction(e -> { date = taskDate.getValue(); });
 
         Button addTask = new Button("Add Task");
+        addTask.setId("AddTask");
         addTask.setOnMouseClicked(e->{
             if(!(taskTitle.getText().equals(""))) {
                 String tag = tagsButton.tagsButton.getText().equals("Tags") ? "No Tag!" : tagsButton.tagsButton.getText();     //default to no tag if isnt chosen
