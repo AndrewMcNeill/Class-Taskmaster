@@ -3,6 +3,7 @@ package ui;
 import database.Database;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -67,6 +68,7 @@ public class FilterPane extends VBox {
         Region region2 = new Region(); region2.setId("filterpane_region2");
         Region region3 = new Region(); region3.setId("filterpane_region3");
         Region region4 = new Region(); region4.setId("filterpane_region4");
+        VBox.setVgrow(region4, Priority.ALWAYS);
 
         this.getChildren().addAll(
                 allTasksButton,
