@@ -3,6 +3,8 @@
     color2: #646475;
     color3: #414150;
     color4: #33333d;
+    color5: #0ebf8b;
+    color6: #1abf58;
 }
 
 
@@ -112,4 +114,50 @@
     -fx-prompt-text-fill: #c8cbc5;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
+}
+
+#DBLoginPane {
+    -fx-background-color: #33333d;
+}
+
+#dbInfo {
+    -fx-background-color: #33333d;
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #c8cbc5;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-border-width: 2px;
+    -fx-border-color: #33333d #33333d #646475 #33333d;
+    -fx-font-size: 20px;
+}
+
+#dbInfo:focused {
+    -fx-background-color: #33333d;
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #c8cbc5;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-border-width: 2px;
+    -fx-border-color: #33333d #33333d color5 #33333d;
+    -fx-font-size: 20px;
+}
+
+#saveLoginLabel {
+    -fx-text-fill: #FFFFFF;
+}
+
+#loginButton {
+     -fx-text-fill: #33333d;
+     -fx-background-color: color5;
+     -fx-border-radius: 0;
+     -fx-background-radius: 0;
+     -fx-font-size: 26;
+     -fx-font-weight: bold;
+ }
+#loginButton:focused {
+    -fx-background-color: color6;
+}
+
+#Logo {
+    -fx-graphic: url("TaskMasterLogoNew.png");
 }
