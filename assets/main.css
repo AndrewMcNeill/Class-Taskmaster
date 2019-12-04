@@ -1,6 +1,13 @@
+* {
+    color1: #808096;
+    color2: #646475;
+    color3: #414150;
+    color4: #33333d;
+}
+
 
 #FilterPane {
-    -fx-background-color: blue;
+    -fx-background-color: color3;
 }
 
 #FilterPane ScrollPane {
@@ -16,17 +23,14 @@
 #filterpane_region3 {
     -fx-pref-height: 20px;
 }
-#filterpane_region4 {
-    -fx-pref-height: 20px;
-}
 
 #FilterPane Button, .filterbutton {
-    -fx-background-color: cadetblue;
+    -fx-background-color: color2;
     -fx-fill-width: true;
     -fx-max-width: 999999;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
 #FilterPane Button:hover, .filterbutton:hover {
-    -fx-background-color: aliceblue;
+    -fx-background-color: color1;
 }
