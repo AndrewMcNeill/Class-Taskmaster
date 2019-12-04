@@ -29,7 +29,7 @@ public class DescriptionPane extends VBox {
     private HBox tagsButtonBox       = new HBox();
     private TagsButton tagsButton    = new TagsButton();
     private TextArea taskDescription = new TextArea();
-    private final Label noneSelected = new Label("Click on a Task to see its details");
+    private final Label noneSelected = new Label();
 
 
     public static DescriptionPane getInstance() {
@@ -39,6 +39,7 @@ public class DescriptionPane extends VBox {
     }
 
     private DescriptionPane() {
+        noneSelected.setId("details");
         HBox.setHgrow(taskTitle, Priority.ALWAYS);
         VBox.setVgrow(vbox, Priority.ALWAYS);
         VBox.setVgrow(taskDescription, Priority.ALWAYS);
