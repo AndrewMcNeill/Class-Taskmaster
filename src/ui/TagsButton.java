@@ -1,22 +1,16 @@
 package ui;
 
 import database.Database;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.Node;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import sample.Main;
-
-import javax.xml.crypto.Data;
-import java.sql.SQLException;
-import java.util.Collection;
-import java.util.HashMap;
 
 public class TagsButton {
 
     MenuButton tagsButton;
     private CustomMenuItem item;
+    private CustomMenuItem addTag;
     private TextField newTag;
     private Button deleteTag = new Button("X");
     public boolean ready = false;
@@ -28,11 +22,13 @@ public class TagsButton {
 
 
         tagsButton = new MenuButton("Tags");
+        tagsButton.setId("TagsButton");
         tagsButton.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
             updateTagList();
         });
 
         newTag = new TextField();
+        newTag.setId("TagsInputField");
         newTag.setPromptText("+ New Tag");
         newTag.setOnAction(e->{
             if (!Main.tagList.contains(newTag.getText())){
@@ -42,12 +38,13 @@ public class TagsButton {
                     Database.getInstance().insertTag(newTag.getText());
                     tagsButton.setText(newTag.getText()); //set the buttons text *after* the tag has been created in the DB
                     newTag.clear();
-                    FilterPane.getInstance().f.updateTagList();
+                    FilterPane.getInstance().tagFilters.updateTagList();
                 }
             }
         });
 
-        CustomMenuItem addTag = new CustomMenuItem(newTag, false);
+        addTag = new CustomMenuItem(newTag, false);
+        addTag.setId("TagInputWrapper");
         tagsButton.getItems().add(addTag);
     }
 
@@ -59,7 +56,7 @@ public class TagsButton {
     public void updateTagList() {
         tagsButton.getItems().clear();
         //add the text box for making new tags
-        tagsButton.getItems().add(new CustomMenuItem(newTag, false));
+        tagsButton.getItems().add(addTag);
         for (String tag : Main.tagList){
             //System.out.println(tag);
             tagsButton.getItems().add(makeNewTagButton(tag));
@@ -73,10 +70,11 @@ public class TagsButton {
         if (tagName.equals("No Tag!")) {
             hbox.getChildren().addAll(label);
         } else {
-            hbox.getChildren().addAll(label, new DeleteButton(label));
+            hbox.getChildren().addAll(new DeleteButton(label), label);
         }
         hbox.setSpacing(20);
         CustomMenuItem item = new CustomMenuItem(hbox);
+        item.setId("Tag");
         return item;
     }
     class DeleteButton extends Label {
@@ -84,8 +82,7 @@ public class TagsButton {
         Label selfLabel;
         DeleteButton(Label selfLabel){
             this.selfLabel = selfLabel;
-            this.setStyle("-fx-background-color: darkred");
-            this.setText("X");
+            this.setId("DeleteTagsButton");
             this.setOnMouseClicked(e->{
                 Main.tagList.remove(selfLabel.getText());
                 tagsButton.setText("No Tag!");

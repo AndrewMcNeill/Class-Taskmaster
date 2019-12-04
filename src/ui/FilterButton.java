@@ -10,15 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class FilterButton extends HBox {
+public class FilterButton extends Button {
     private String where;
 
     public FilterButton(String text, String where) {
+        super(text);
         this.where = where;
-        Button button = new Button(text);
-        getChildren().add(button);
 
-        button.setOnMouseClicked(e -> {
+        this.setOnMouseClicked(e -> {
             Main.taskCollection.clear();
             grabTasks();
         });

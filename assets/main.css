@@ -1,3 +1,414 @@
-.filterbutton Button {
-    -fx-background-color: cadetblue;
+* {
+    color1: #808096;
+    color2: #646475;
+    color3: #414150;
+    color4: #33333d;
+    color5: #0EBF8B;
+    color6: #37bf50;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
 }
+
+/*  Filter Pane  */
+
+#FilterPane {
+    -fx-background-color: color3;
+}
+
+#FilterPane ScrollPane {
+    -fx-padding: 0;
+}
+
+#filterpane_region1 {
+    -fx-pref-height: 20px;
+}
+#filterpane_region2 {
+    -fx-pref-height: 20px;
+}
+#filterpane_region3 {
+    -fx-pref-height: 20px;
+}
+
+#FilterPane Button, .filterbutton {
+    -fx-background-color: color2;
+    -fx-text-fill: #FFFFFF;
+    -fx-fill-width: true;
+    -fx-max-width: 999999;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+#FilterPane Button:hover, .filterbutton:hover {
+    -fx-background-color: color1;
+}
+
+/*  Tags list  */
+
+
+#DeleteTagsButton {
+    -fx-graphic: url("deleteimage.png");
+}
+
+#DeleteTagsButton:hover{
+    -fx-graphic: url("deleteimagehighlight.png");
+}
+
+#Tag:hover{
+    -fx-background-color: color2;
+}
+
+#TagsInputField {
+    -fx-background-color: color4;
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: color2;
+}
+
+#TagInputWrapper:hover {
+    -fx-background-color: color4;
+}
+
+#TagsButton .label {
+    -fx-text-fill: #FFFFFF;
+}
+
+#TagsButton {
+    -fx-background-color: color4;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.context-menu {
+    -fx-background-color: color4;
+    -fx-text-fill: #FFFFFF;
+}
+.context-menu:hover {
+    -fx-background-color: color4;
+}
+
+#TagsButton:hover {
+    -fx-background-color: color4;
+}
+
+/*  Add Task  */
+
+#TaskDatePicker {
+    -fx-background-color: color3;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+#TagsDatePicker > .text-field {
+    -fx-text-fill: #FFFFFF;
+}
+
+#TaskDatePicker > .arrow-button {
+    -fx-padding: 0px;
+}
+
+#TaskDatePicker > .arrow-button > .arrow {
+    -fx-padding: 0px;
+}
+
+#AddTask {
+    -fx-background-color: color4;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-text-fill: #FFFFFF;
+}
+
+#TaskTitle {
+    -fx-background-color: color4;
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #c8cbc5;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+/*  Description  */
+
+DescriptionPane {
+    -fx-pref-width: 300px;
+    -fx-background-color: color3;
+}
+
+DescriptionPane > Label {
+    -fx-text-fill: white;
+}
+
+DescriptionPane TextField {
+    -fx-background-color: color2;
+    -fx-text-fill: white;
+}
+
+DescriptionPane DatePicker {
+    -fx-background-color: color2;
+    -fx-pref-width: 120px;
+}
+
+DescriptionPane Region {
+    -fx-pref-height: 20px;
+}
+
+DescriptionPane TextArea{
+    -fx-control-inner-background: color2;
+    -fx-background-color: color2;
+}
+
+#details {
+    -fx-graphic: url("details.png");
+}
+
+
+
+/*  Summary  */
+
+SummaryPane {
+    -fx-background-color: color4;
+}
+
+TaskSummary {
+    -fx-background-color: color3;
+    -fx-padding: 10px;
+    -fx-hgap: 5px;
+}
+
+TaskSummary:hover {
+    -fx-background-color: color2;
+}
+TaskSummary * {
+    -fx-text-fill: white;
+    -fx-text-overrun: clip;
+}
+
+
+.delete {
+    -fx-graphic: url("deleteimage.png");
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+
+.delete:hover{
+    -fx-graphic: url("deleteimagehighlight.png");
+}
+
+.complete {
+    -fx-background-color: #5d8054;
+    -fx-text-fill: color3;
+}
+
+.incomplete {
+    -fx-background-color: #d1cb8b;
+    -fx-text-fill: color3;
+}
+
+
+#DBLoginPane {
+    -fx-background-color: #33333d;
+}
+
+#dbInfo {
+    -fx-background-color: #33333d;
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #c8cbc5;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-border-width: 2px;
+    -fx-border-color: #33333d #33333d #646475 #33333d;
+    -fx-font-size: 20px;
+}
+
+#dbInfo:focused {
+    -fx-background-color: #33333d;
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #c8cbc5;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-border-width: 2px;
+    -fx-border-color: #33333d #33333d color5 #33333d;
+    -fx-font-size: 20px;
+}
+
+#saveLoginLabel {
+    -fx-text-fill: #FFFFFF;
+}
+
+#loginButton {
+     -fx-text-fill: #33333d;
+     -fx-background-color: color5;
+     -fx-border-radius: 0;
+     -fx-background-radius: 0;
+     -fx-font-size: 26;
+     -fx-font-weight: bold;
+ }
+#loginButton:focused {
+    -fx-background-color: color6;
+}
+
+#Logo {
+    -fx-graphic: url("TaskMasterLogoNew.png");
+}
+
+/*  Description  */
+
+DescriptionPane {
+    -fx-pref-width: 300px;
+    -fx-background-color: color3;
+}
+
+DescriptionPane > Label {
+    -fx-text-fill: white;
+}
+
+DescriptionPane TextField {
+    -fx-background-color: color2;
+    -fx-text-fill: white;
+}
+
+DescriptionPane DatePicker {
+    -fx-background-color: color2;
+    -fx-pref-width: 120px;
+}
+
+DescriptionPane Region {
+    -fx-pref-height: 20px;
+}
+
+DescriptionPane TextArea{
+    -fx-control-inner-background: color2;
+    -fx-background-color: color2;
+}
+
+
+/*  Summary  */
+
+SummaryPane {
+    -fx-background-color: color4;
+}
+
+TaskSummary {
+    -fx-background-color: color3;
+    -fx-padding: 10px;
+    -fx-hgap: 5px;
+}
+
+TaskSummary:hover {
+    -fx-background-color: color2;
+}
+TaskSummary * {
+    -fx-text-fill: white;
+    -fx-text-overrun: clip;
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.0;
+}
+.scroll-bar > .thumb {
+    -fx-background-color: color1;
+    -fx-background-insets: 2.0;
+}
+
+.scroll-bar > .thumb:hover {
+    -fx-background-color: color5;
+    -fx-background-insets: 2.0;
+}
+
+
+
+.delete {
+    -fx-graphic: url("deleteimage.png");
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+
+.delete:hover{
+    -fx-graphic: url("deleteimagehighlight.png");
+}
+
+.complete {
+    -fx-background-color: #5d8054;
+    -fx-text-fill: color3;
+}
+
+.incomplete {
+    -fx-background-color: #d1cb8b;
+    -fx-text-fill: color3;
+}
+
+/*  Stats  */
+
+StatsPane {
+    -fx-background-color: color3;
+}
+
+StatsPane Region {
+    -fx-pref-height: 20px;
+}
+
+StatsPane Button {
+    -fx-background-color: color2;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+StatsPane Button:hover {
+    -fx-background-color: color1;
+}
+
+.chart {
+    -fx-background-color: color3;
+}
+
+.chart-content {
+    -fx-background-color: color3;
+    -fx-tick-mark-visible: false;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-title {
+    -fx-text-fill: white;
+    -fx-font-size: 1.6em;
+}
+
+.axis-label {
+    -fx-text-fill: white;
+}
+
+.axis {
+    -fx-font-size: 1.1em;
+    -fx-tick-label-fill: white;
+    -fx-tick-length: 20;
+    -fx-minor-tick-length: 0;
+}
+
+.chart-series-line {
+    -fx-stroke-width: 2px;
+    -fx-effect: none;
+}
+
+.default-color0.chart-series-line { -fx-stroke: white; }
+.default-color1.chart-series-line { -fx-stroke: white; }
+
+
+
+.chart-pie-label-line {
+    -fx-stroke: white;
+    -fx-fill: white;
+}
+
+.chart-pie-label {
+    -fx-fill: white;
+    -fx-font-size: 1em;
+}
+
+
+.default-color0.chart-pie { -fx-pie-color: color1; }
+.default-color1.chart-pie { -fx-pie-color: color2; }
+.default-color2.chart-pie { -fx-pie-color: color1; }
+.default-color3.chart-pie { -fx-pie-color: color2; }

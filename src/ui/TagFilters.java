@@ -9,9 +9,9 @@ import sample.Main;
 
 import java.util.logging.Filter;
 
-public class FilterTagButton extends VBox {
+public class TagFilters extends VBox {
 
-    public FilterTagButton(){
+    public TagFilters(){
         updateTagList();
         this.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
             updateTagList();
@@ -25,6 +25,7 @@ public class FilterTagButton extends VBox {
                     "taskid in " +
                             "(SELECT taskid FROM `tagstaskrelational` WHERE tagid = " +
                             "(SELECT tagid FROM `tags` WHERE tagname = '"+tag+"'))");
+            b.getStyleClass().add("filterbutton");
             this.getChildren().addAll(b);
         }
     }

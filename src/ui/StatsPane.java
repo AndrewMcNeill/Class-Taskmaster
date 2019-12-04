@@ -8,6 +8,8 @@ import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
+import javafx.util.StringConverter;
 import models.Refreshable;
 import sample.Main;
 
@@ -36,18 +38,25 @@ public class StatsPane extends BorderPane implements Refreshable {
             Main.changeScene(MainPane.getInstance());
         });
         this.setBottom(backButton);
+        this.setTop(new Region());
 
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("Completed Tasks");
+        yAxis.setTickLabelFormatter(new IntegerStringConverter());
         lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle("The past week");
         lineChart.getData().add(new XYChart.Series<>());
         lineChart.getData().get(0).setName("Days");
         this.setRight(lineChart);
 
         pieChart = new PieChart();
+        pieChart.setTitle("The next month");
         pieChart.setData(FXCollections.observableArrayList());
         this.setLeft(pieChart);
+
+        pieChart.setLegendVisible(false);
+        lineChart.setLegendVisible(false);
 
 
 
@@ -95,6 +104,21 @@ public class StatsPane extends BorderPane implements Refreshable {
             } catch (SQLException e) { }
             String name = i == 0 ? "today" : i == 1 ? "yesterday" : i + " days ago";
             series.getData().add(new XYChart.Data(name, count));
+        }
+    }
+
+    static class IntegerStringConverter extends StringConverter<Number> {
+        IntegerStringConverter() { }
+        @Override
+        public String toString(Number object) {
+            if(object.intValue()!=object.doubleValue())
+                return "";
+            return ""+(object.intValue());
+        }
+        @Override
+        public Number fromString(String string) {
+            Number val = Double.parseDouble(string);
+            return val.intValue();
         }
     }
 }
