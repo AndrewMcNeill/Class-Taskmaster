@@ -8,6 +8,10 @@ A statistics page is also available to view your task completion history within 
 
 ## Getting Started
 
+  ### Technology
+  
+  **IntelliJ IDEA**
+
   ### Installation
  
   Clone the project to your device.
@@ -16,7 +20,7 @@ A statistics page is also available to view your task completion history within 
   ```
   Or you may download the **.zip** file.
   
-  Load the project inside of your preferred Java IDE.
+  Load the project inside of IntelliJ.
   
   ### Navigating the App
   
