@@ -5,6 +5,7 @@
     color4: #33333d;
 }
 
+/*  Filter Pane  */
 
 #FilterPane {
     -fx-background-color: color3;
@@ -37,6 +38,9 @@
     -fx-background-color: color1;
 }
 
+/*  Tags list  */
+
+
 #DeleteTagsButton {
     -fx-graphic: url("deleteimage.png");
 }
@@ -46,17 +50,17 @@
 }
 
 #Tag:hover{
-    -fx-background-color: #646475;
+    -fx-background-color: color2;
 }
 
 #TagsInputField {
-    -fx-background-color: #33333d;
+    -fx-background-color: color4;
     -fx-text-fill: #FFFFFF;
-    -fx-prompt-text-fill: #646475;
+    -fx-prompt-text-fill: color2;
 }
 
 #TagInputWrapper:hover {
-    -fx-background-color: #33333d;
+    -fx-background-color: color4;
 }
 
 #TagsButton .label {
@@ -64,25 +68,27 @@
 }
 
 #TagsButton {
-    -fx-background-color: #414150;
+    -fx-background-color: color4;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
 
 .context-menu {
-    -fx-background-color: #33333d;
+    -fx-background-color: color4;
     -fx-text-fill: #FFFFFF;
 }
 .context-menu:hover {
-    -fx-background-color: #33333d;
+    -fx-background-color: color4;
 }
 
 #TagsButton:hover {
-    -fx-background-color: #33333d;
+    -fx-background-color: color4;
 }
 
+/*  Add Task  */
+
 #TaskDatePicker {
-    -fx-background-color: #414150;
+    -fx-background-color: color3;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
@@ -100,16 +106,30 @@
 }
 
 #AddTask {
-    -fx-background-color: #414150;
+    -fx-background-color: color4;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
     -fx-text-fill: #FFFFFF;
 }
 
 #TaskTitle {
-    -fx-background-color: #33333d;
+    -fx-background-color: color4;
     -fx-text-fill: #FFFFFF;
     -fx-prompt-text-fill: #c8cbc5;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
+}
+
+/*  Description  */
+
+DescriptionPane {
+    -fx-pref-width: 300px;
+    -fx-background-color: color3;
+}
+
+
+/*  Summary  */
+
+SummaryPane {
+    -fx-background-color: color4;
 }

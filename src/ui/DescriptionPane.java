@@ -35,9 +35,6 @@ public class DescriptionPane extends VBox {
     }
 
     private DescriptionPane() {
-
-
-        this.setStyle("-fx-background-color: aqua");
         hbox.getChildren().addAll(taskTitle, taskDate);
         vbox.getChildren().addAll(hbox, taskDescription, tagsButton.tagsButton);
         vbox.setVisible(false);
