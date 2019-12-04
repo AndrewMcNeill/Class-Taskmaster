@@ -3,10 +3,11 @@
     color2: #646475;
     color3: #414150;
     color4: #33333d;
-    color5: #0ebf8b;
-    color6: #1abf58;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
 }
 
+/*  Filter Pane  */
 
 #FilterPane {
     -fx-background-color: color3;
@@ -39,6 +40,9 @@
     -fx-background-color: color1;
 }
 
+/*  Tags list  */
+
+
 #DeleteTagsButton {
     -fx-graphic: url("deleteimage.png");
 }
@@ -48,17 +52,17 @@
 }
 
 #Tag:hover{
-    -fx-background-color: #646475;
+    -fx-background-color: color2;
 }
 
 #TagsInputField {
-    -fx-background-color: #33333d;
+    -fx-background-color: color4;
     -fx-text-fill: #FFFFFF;
-    -fx-prompt-text-fill: #646475;
+    -fx-prompt-text-fill: color2;
 }
 
 #TagInputWrapper:hover {
-    -fx-background-color: #33333d;
+    -fx-background-color: color4;
 }
 
 #TagsButton .label {
@@ -66,25 +70,27 @@
 }
 
 #TagsButton {
-    -fx-background-color: #414150;
+    -fx-background-color: color4;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
 
 .context-menu {
-    -fx-background-color: #33333d;
+    -fx-background-color: color4;
     -fx-text-fill: #FFFFFF;
 }
 .context-menu:hover {
-    -fx-background-color: #33333d;
+    -fx-background-color: color4;
 }
 
 #TagsButton:hover {
-    -fx-background-color: #33333d;
+    -fx-background-color: color4;
 }
 
+/*  Add Task  */
+
 #TaskDatePicker {
-    -fx-background-color: #414150;
+    -fx-background-color: color3;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
@@ -102,19 +108,93 @@
 }
 
 #AddTask {
-    -fx-background-color: #414150;
+    -fx-background-color: color4;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
     -fx-text-fill: #FFFFFF;
 }
 
 #TaskTitle {
-    -fx-background-color: #33333d;
+    -fx-background-color: color4;
     -fx-text-fill: #FFFFFF;
     -fx-prompt-text-fill: #c8cbc5;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
+
+/*  Description  */
+
+DescriptionPane {
+    -fx-pref-width: 300px;
+    -fx-background-color: color3;
+}
+
+DescriptionPane > Label {
+    -fx-text-fill: white;
+}
+
+DescriptionPane TextField {
+    -fx-background-color: color2;
+    -fx-text-fill: white;
+}
+
+DescriptionPane DatePicker {
+    -fx-background-color: color2;
+    -fx-pref-width: 120px;
+}
+
+DescriptionPane Region {
+    -fx-pref-height: 20px;
+}
+
+DescriptionPane TextArea{
+    -fx-control-inner-background: color2;
+    -fx-background-color: color2;
+}
+
+
+/*  Summary  */
+
+SummaryPane {
+    -fx-background-color: color4;
+}
+
+TaskSummary {
+    -fx-background-color: color3;
+    -fx-padding: 10px;
+    -fx-hgap: 5px;
+}
+
+TaskSummary:hover {
+    -fx-background-color: color2;
+}
+TaskSummary * {
+    -fx-text-fill: white;
+    -fx-text-overrun: clip;
+}
+
+
+.delete {
+    -fx-graphic: url("deleteimage.png");
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+
+.delete:hover{
+    -fx-graphic: url("deleteimagehighlight.png");
+}
+
+.complete {
+    -fx-background-color: #5d8054;
+    -fx-text-fill: color3;
+}
+
+.incomplete {
+    -fx-background-color: #d1cb8b;
+    -fx-text-fill: color3;
+}
+
 
 #DBLoginPane {
     -fx-background-color: #33333d;
