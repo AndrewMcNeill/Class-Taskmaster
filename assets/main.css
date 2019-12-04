@@ -158,3 +158,39 @@ DescriptionPane TextArea{
 SummaryPane {
     -fx-background-color: color4;
 }
+
+TaskSummary {
+    -fx-background-color: color3;
+    -fx-padding: 10px;
+    -fx-hgap: 5px;
+}
+
+TaskSummary:hover {
+    -fx-background-color: color2;
+}
+TaskSummary * {
+    -fx-text-fill: white;
+    -fx-text-overrun: clip;
+}
+
+
+.delete {
+    -fx-graphic: url("deleteimage.png");
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+
+.delete:hover{
+    -fx-graphic: url("deleteimagehighlight.png");
+}
+
+.complete {
+    -fx-background-color: #5d8054;
+    -fx-text-fill: color3;
+}
+
+.incomplete {
+    -fx-background-color: #d1cb8b;
+    -fx-text-fill: color3;
+}
