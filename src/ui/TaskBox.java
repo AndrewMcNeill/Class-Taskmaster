@@ -3,6 +3,7 @@ package ui;
 import database.Database;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import models.Task;
 import sample.Main;
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class TaskBox extends HBox {
         taskTitle.setId("TaskTitle");
 
         taskTitle.setPromptText("Add A Task...");
+        HBox.setHgrow(taskTitle, Priority.ALWAYS);
         taskDate.setEditable(false);
         taskDate.getEditor().setDisable(true);
         taskDate.setPromptText("Pick a Date...");

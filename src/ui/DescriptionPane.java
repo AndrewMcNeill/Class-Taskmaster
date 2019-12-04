@@ -3,12 +3,15 @@ package ui;
 import database.Database;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Pos;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import models.Task;
 import sample.Main;
@@ -23,9 +26,10 @@ public class DescriptionPane extends VBox {
     private VBox vbox                = new VBox();
     private TextField taskTitle      = new TextField();
     private DatePicker taskDate      = new DatePicker();
+    private HBox tagsButtonBox       = new HBox();
     private TagsButton tagsButton    = new TagsButton();
     private TextArea taskDescription = new TextArea();
-    private final Label noneSelected = new Label("Click on a Task to see its details");
+    private final Label noneSelected = new Label();
 
 
     public static DescriptionPane getInstance() {
@@ -35,11 +39,15 @@ public class DescriptionPane extends VBox {
     }
 
     private DescriptionPane() {
-
-
-        this.setStyle("-fx-background-color: aqua");
+        noneSelected.setId("details");
+        HBox.setHgrow(taskTitle, Priority.ALWAYS);
+        VBox.setVgrow(vbox, Priority.ALWAYS);
+        VBox.setVgrow(taskDescription, Priority.ALWAYS);
+        //((Region) taskDescription.lookup(".content")).setStyle("-fx-background-color: red");
         hbox.getChildren().addAll(taskTitle, taskDate);
-        vbox.getChildren().addAll(hbox, taskDescription, tagsButton.tagsButton);
+        tagsButtonBox.getChildren().add(tagsButton.tagsButton);
+        tagsButtonBox.setAlignment(Pos.BASELINE_RIGHT);
+        vbox.getChildren().addAll(hbox, new Region(), taskDescription, new Region(), tagsButtonBox);
         vbox.setVisible(false);
 
         this.getChildren().addAll(noneSelected, vbox);
@@ -68,7 +76,6 @@ public class DescriptionPane extends VBox {
 
 
         tagsButton.tagsButton.textProperty().addListener((observableValue, oldVal, newVal) -> {
-            System.out.println("CHANGED STATE");
             if(!(this.task.getTag().equals(newVal))) {
                 this.task.setTag(tagsButton.tagsButton.getText());
                 Main.taskCollection.clear();
@@ -81,13 +88,12 @@ public class DescriptionPane extends VBox {
                 this.task.setDescription(taskDescription.getText());
             }
         });
-        taskDescription.setMaxWidth(300);
-
     }
 
     void updateDesc(Task task) {
         this.task = task;
-        noneSelected.setVisible(false);
+        //noneSelected.setVisible(false);
+        this.getChildren().remove(noneSelected);
         vbox.setVisible(true);
         taskTitle.setText(task.getTitle());
         taskDate.setValue(task.getDate());

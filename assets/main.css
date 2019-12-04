@@ -3,6 +3,8 @@
     color2: #646475;
     color3: #414150;
     color4: #33333d;
+    color5: #0EBF8B;
+    color6: #37bf50;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
@@ -152,6 +154,11 @@ DescriptionPane TextArea{
     -fx-background-color: color2;
 }
 
+#details {
+    -fx-graphic: url("details.png");
+}
+
+
 
 /*  Summary  */
 
@@ -240,4 +247,92 @@ TaskSummary * {
 
 #Logo {
     -fx-graphic: url("TaskMasterLogoNew.png");
+}
+
+/*  Description  */
+
+DescriptionPane {
+    -fx-pref-width: 300px;
+    -fx-background-color: color3;
+}
+
+DescriptionPane > Label {
+    -fx-text-fill: white;
+}
+
+DescriptionPane TextField {
+    -fx-background-color: color2;
+    -fx-text-fill: white;
+}
+
+DescriptionPane DatePicker {
+    -fx-background-color: color2;
+    -fx-pref-width: 120px;
+}
+
+DescriptionPane Region {
+    -fx-pref-height: 20px;
+}
+
+DescriptionPane TextArea{
+    -fx-control-inner-background: color2;
+    -fx-background-color: color2;
+}
+
+
+/*  Summary  */
+
+SummaryPane {
+    -fx-background-color: color4;
+}
+
+TaskSummary {
+    -fx-background-color: color3;
+    -fx-padding: 10px;
+    -fx-hgap: 5px;
+}
+
+TaskSummary:hover {
+    -fx-background-color: color2;
+}
+TaskSummary * {
+    -fx-text-fill: white;
+    -fx-text-overrun: clip;
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.0;
+}
+.scroll-bar > .thumb {
+    -fx-background-color: color1;
+    -fx-background-insets: 2.0;
+}
+
+.scroll-bar > .thumb:hover {
+    -fx-background-color: color5;
+    -fx-background-insets: 2.0;
+}
+
+
+
+.delete {
+    -fx-graphic: url("deleteimage.png");
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+
+.delete:hover{
+    -fx-graphic: url("deleteimagehighlight.png");
+}
+
+.complete {
+    -fx-background-color: #5d8054;
+    -fx-text-fill: color3;
+}
+
+.incomplete {
+    -fx-background-color: #d1cb8b;
+    -fx-text-fill: color3;
 }
